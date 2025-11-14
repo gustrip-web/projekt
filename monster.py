@@ -4,12 +4,5 @@ class Monster():
         self.dmg = dmg
         self.name = name
         self.lvl = lvl
-    
-
-
-golem = Monster("Golem" , 100, 20, 1)
-goblin = Monster("Goblin", 25, 5, 1)
-
-print(f"Ditt monster har {golem.hp} hp")
 
 
