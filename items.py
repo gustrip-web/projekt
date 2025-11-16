@@ -4,6 +4,15 @@ class Weapon():
         self.damage = damage
         self.critrate = critrate
         self.lvl = lvl
+    
+    def sword_damage(self):
+        return self.damage *(1.1 ** (self.lvl-1))
+    
+    def crit_attack(self):
+        return self.damage **2
+    
+    def lvl_up(self):
+        self.lvl += 1
 
 
 
