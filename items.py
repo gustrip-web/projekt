@@ -1,3 +1,5 @@
+import random as rand
+
 class Weapon():
     def __init__(self, name, damage, critrate, crit_damage, lvl):
         self.name = name
@@ -9,8 +11,10 @@ class Weapon():
     def sword_damage(self):
         dmg = self.damage *(1.1 ** (self.lvl-1))
     
-    def crit_attack(self):
-        dmg *= self.crit_damage
+        if rand.random(0.0,1.0) <= critrate:
+            dmg *= self.crit_damage
+            return dmg, True
+        return dmg, False
     
     def lvl_up(self):
         self.lvl += 1
