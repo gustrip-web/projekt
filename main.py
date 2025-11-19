@@ -3,8 +3,12 @@ import random as rand
 from items import *
 from character import *
 
+tank = Characterclass("Mr.Tank", 200, 10, 1)
+Warrior = Characterclass("Warrior", 100, )
+
+
 print("Welcome to the swepelt")
-while true:
+while True:
      print(""" 
      Read about the Classes:
      1. Warrior               3. Tank
@@ -21,11 +25,16 @@ while true:
      elif infosvar == "4":
                print("Gambler is")
      elif infosvar == "5":
-          val = (input("""
+          val = print(input("""
           Vad är ditt val? 
           Trcyk 0 noll för att läsa mer
           """))
-          if 
+          if val == 1:
+               playerclass = Warrior
+          elif val ==2:
+               playerclass = Magican
+          elif val ==2:
+               playerclass = Magican
           
           
 Characterclass = input("Choose your Class:")
