@@ -4,5 +4,3 @@ class Monster():
         self.dmg = dmg
         self.name = name
         self.lvl = lvl
-        
-Goblin=Monster(Goblin, 50, 10, 1)
