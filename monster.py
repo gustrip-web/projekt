@@ -1,12 +1,10 @@
 import random as rand
 class Monster():
     def __init__(self, name, hp, dmg, lvl): 
-        self.hp = hp*(1+lvl/5)
-        self.dmg = dmg
-        self.name = name
         self.lvl = lvl
-    
-    def 
-    
+        self.hp = hp*(1+self.lvl/5)
+        self.dmg = dmg*(1+self.lvl/5)
+        self.name = name
+
     def exp_reward(self):
         return rand.randint(10,35)

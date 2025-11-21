@@ -13,8 +13,6 @@ class Weapon():
     
         if rand.random(0.0,1.0) <= critrate:
             dmg *= self.crit_damage
-            return dmg, True
-        return dmg, False
     
     def lvl_up(self):
         self.lvl += 1

@@ -4,15 +4,17 @@ from items import *
 from character import *
 
 #Characters
-tank = Characterclass("Mr.Tank", 200, 10, 0.1, 2, 1)
-warrior = Characterclass("Warrior", 100, 25, 0.1, 2, 1)
-mage = Characterclass("Magician", 60, 35, 0.2, 1.5, 1)
-gambler = Characterclass("Gambler", 100, 1, 0.35, 1000, 1)
+tank = Characterclass("Mr.Tank", 200, 10, 0.1, 2)
+warrior = Characterclass("Warrior", 100, 25, 0.1, 2)
+mage = Characterclass("Magician", 60, 35, 0.2, 1.5)
+gambler = Characterclass("Gambler", 100, 1, 0.35, 1000)
 
 #Monster
-skeleton=Monster("Skeleton", 40, 20, )
-goblin=Monster("Goblin",75, 10, )
-
+Monster = [
+    Monster("Skeleton", 40, 20,),
+    Monster("Goblin", 75, 10),
+    Monster("Epstein", 100, 10)
+    ]
 
 print("Welcome to the Sweelept")
 while True:
@@ -78,6 +80,7 @@ elif Platsval ==3:
 
 elif Platsval ==4:
 
+def combat(character_damage, character_hp, ):
 
 
 
@@ -98,6 +101,4 @@ elif Platsval ==4:
 # strengthpotion = Items("strength_potion", 0, 10, 1)
 
 
-# svärd = Weapon("Snopp", 25, 1, 1)
-    
-# print(svärd)
+# svärd = Weapon("Long Sword", 25, 1, 1)
