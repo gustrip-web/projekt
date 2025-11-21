@@ -5,8 +5,8 @@ class Monster():
         self.dmg = dmg
         self.name = name
         self.lvl = lvl
+    
+    def 
+    
     def exp_reward(self):
         return rand.randint(10,35)
-    
-def stats(self):
-    return f"{self.name}

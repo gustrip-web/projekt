@@ -28,5 +28,7 @@ class Characterclass():
     def character(self):
         true_dmg = str * dmg
 
+    
+
 Player1.character_damage() * svärd.damage()
     

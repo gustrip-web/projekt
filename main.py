@@ -56,7 +56,7 @@ while True:
                     print("skriv ett tal")
     else:
                     print("skriv ett tal")
-playername = input(Vad ska din karaktär heta?)
+playername = input("Vad ska din karaktär heta?")
 
 alive = True
 while alive == True:
