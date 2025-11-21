@@ -80,7 +80,7 @@ elif Platsval ==3:
 
 elif Platsval ==4:
 
-def combat(character_damage, character_hp, ):
+
 
 
 
