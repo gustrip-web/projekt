@@ -15,6 +15,9 @@ monster_list1= [Monster("Skeleton", 40, 20, 1),
     Monster("Devil", 250, 28, 1),
     Monster("Goon", 35, 5, 1)]
 
+weapons_list1= [Weapon("Fists","1",0.25,1.5),
+Weapon("Dagger", 1.1, 1.50,1.25)]
+
 print("Welcome to the Sweelept")
 while True:
     print(""" 
@@ -126,8 +129,9 @@ def grottvägen():
     else: #Forsätter
         print("Du går ner i grottan")
         monsterval = monsterpullar()
-        battle(monsterval, playerclass)
-        
+        battleoutcome  = battle(monsterval, playerclass)
+        if battleoutcome ==
+
 
         
         
@@ -197,9 +201,8 @@ def battle(battling_monster, batteling_character):
 
     while Characterclass.hp > 0 and Monster.hp > 0:
         
-        weapon_damage = Weapon.damage
         
-        dmg = Characterclass.str * weapon_damage
+        dmg = batteling_character.str * batteling_character.weapon.damage
         if rand.random() <= Characterclass.critrate:
             dmg *= Characterclass.crit_damage
         
@@ -211,13 +214,14 @@ def battle(battling_monster, batteling_character):
             print("Du dödade monstret!")
             reward = monster.exp_reward()
             hero.add_exp(reward)
-            return
+            return reward
 
         Characterclass.hp -= Monster.dmg
 
         if Characterclass.hp < 0:
             print("Du blev besegrad av monstret!")
-            return
+            alive = False
+            return alive
 
 
 

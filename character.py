@@ -34,13 +34,3 @@ class Characterclass():
 Player1.character_damage() * svärd.damage()
     
 
-def attack(self, target):
-        damage = self.str
-        if rand.random() <= self.critrate:
-            damage *= self.crit_damage
-            print(f"KRITISKT SLAG! {self.name} gör {damage} skada!")
-            
-        else:
-            print(f"{self.name} at {target.name} for {damage} damage!")
-            
-        target.hp -= damage
