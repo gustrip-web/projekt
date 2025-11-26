@@ -7,15 +7,6 @@ class Weapon():
         self.critrate = critrate
         self.crit_damage = crit_damage
         self.lvl = lvl
-    
-    def sword_damage(self):
-        dmg = self.damage *(1.1 ** (self.lvl-1))
-    
-        if rand.random(0.0,1.0) <= critrate:
-            dmg *= self.crit_damage
-    
-    def lvl_up(self):
-        self.lvl += 1
 
 
 

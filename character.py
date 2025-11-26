@@ -11,17 +11,17 @@ class Characterclass():
         self.crit_damage = crit_damage
         self.critrate = critrate
 
-    def character_damage(self):
-        self.str *= (1.1 ** (self.lvl-1))
+    def exp_required(self):
+        return int(100 * (1.2 ** (self.lvl - 1)))
 
-        if rand.random() <= self.critrate:
-            self.str *= self.crit_damage
+    def level_up(self):
+        self.lvl += 1
+        self.str *= 1.10
+        self.hp *= 1.01
+        print(f"{self.name} levla upp till {self.lvl}!")
     
-    def character_hp(self):
-        self.hp *= (1.01**(self.lvl-1))
-    
-    def add_exp(self, amount):
-        self.exp += amount
+    def add_exp(self, reward):
+        self.exp += reward
 
         while self.exp >= 100:
             self.exp -= (100*(1.2**self.lvl))
@@ -29,12 +29,18 @@ class Characterclass():
             self.character_damage()
             self.character_hp()
 
-    
 
-
-
-
-    
 
 Player1.character_damage() * svärd.damage()
     
+
+def attack(self, target):
+        damage = self.str
+        if rand.random() <= self.critrate:
+            damage *= self.crit_damage
+            print(f"KRITISKT SLAG! {self.name} gör {damage} skada!")
+            
+        else:
+            print(f"{self.name} at {target.name} for {damage} damage!")
+            
+        target.hp -= damage
