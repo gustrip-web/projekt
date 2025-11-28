@@ -31,6 +31,6 @@ class Characterclass():
 
 
 
-Player1.character_damage() * svärd.damage()
+
     
 

@@ -2,22 +2,45 @@ from monster import *
 import random as rand
 from items import *
 from character import *
+import time
 
 #Characters
-tank = Characterclass("Mr.Tank", 200, 10, 0.1, 2, 1)
-warrior = Characterclass("Warrior", 100, 25, 0.1, 2, 1)
-magi = Characterclass("Magician", 60, 35, 0.2, 1.5, 1)
-gambler = Characterclass("Gambler", 100, 1, 0.35, 1000, 1)
+tank = Characterclass("Mr.Tank", 200, 10, 0.1, 2)
+warrior = Characterclass("Warrior", 100, 25, 0.1, 2)
+magi = Characterclass("Magician", 60, 35, 0.2, 1.5)
+gambler = Characterclass("Gambler", 100, 1, 0.35, 1000)
+
+# Weapon
+Hands = Weapon("Händer", 1 , 0.001 , 1.2 )
+weapon_list1 = [Weapon("Svärd", 3, 0.1, 1.5),
+Weapon("Dolk",2 , 0.2, 1.5), 
+Weapon("Smörkniv", 1.25, 0.25 , 2),
+Weapon("Yxa", 4, 0.05, 1.5),
+Weapon("Knogjärn", 2, 0.25, 1.25)]
+
+# Items
+Item_list1 = [Item("Small_Health_Potion",15 ,0),
+Item("Medium_Helth_Potion", 30, 1),
+Item("Big_Health_Potion", 60, 1),
+Item("Damgae_boost", 0, 1.5)]
 
 #Monster
 monster_list1= [Monster("Skeleton", 40, 20, 1), 
     Monster("Goblin",75, 10, 1),
-    Monster("Devil", 250, 28, 1),
-    Monster("Goon", 35, 5, 1)]
+    Monster("Goon", 35, 5, 1),
+    Monster("Bandit", 50, 13, 1)]
 
-weapons_list1= [Weapon("Fists","1",0.25,1.5),
-Weapon("Dagger", 1.1, 1.50,1.25)]
+monster_list2= [Monster("Demon", 175, 28, 1),
+    Monster("Troll", 250, 18, 1),
+    Monster("Vandrande Själ", 100, 35, 1),
+    Monster("Varulv", 200, 23, 1)]
+    
+monster_list3= [Monter("Jätte", 400, 35, 1),
+    Monster("Drake", 300, 45, 1),
+    Monster("Skuggriddare", 275, 50, 1),
+    Monster("Golem", 450, 20, 1)]
 
+#Gameplay
 print("Welcome to the Sweelept")
 while True:
     print(""" 
@@ -26,7 +49,7 @@ while True:
      2. Magiacan              4. Gamblier
      5. Choose your class
      """)
-    infosvar = input("Vilken vill du läsa om?")
+    infosvar = input("Vilken vill du läsa om? ")
     if infosvar == "1":
         print("""
         Född på slagfälten där stål möter storm,
@@ -67,7 +90,7 @@ while True:
           1. Warrior               3. Tank
           2. Magiacan              4. Gamblier
           """)
-        val = (input("Vilken karaktär vill du välja"))
+        val = (input("Vilken karaktär vill du välja? "))
         if val == "1":
                          playerclass = warrior
                          break
@@ -86,7 +109,7 @@ while True:
                     print("skriv ett tal")
     else:
                     print("skriv ett tal")
-playername = input("Vad ska din karaktär heta?")
+playername = input("Vad ska din karaktär heta? ")
 
 alive = True
 adventuring=False
@@ -124,17 +147,22 @@ def monsterpullar():
 
 def grottvägen():
     print("Efter ett tag kommer du till en Grotta")
-    if vägdecision() ==1:
+    print("Fuktig tunnel med droppande stalaktiter, svagt ljus från utgången bakom dig. Marken är hal och stenig.")
+    if vägdecision() ==1:     #Om man vänder så kommer man tillbaka till vägvalet
         return
-    else: #Forsätter
+    else: #Forsätte
         print("Du går ner i grottan")
         monsterval = monsterpullar()
-        battleoutcome  = battle(monsterval, playerclass)
-        if battleoutcome ==
-
-
-        
-        
+        battle(monsterval, playerclass)
+        if alive == False:          # Alive ändras i battle func
+            global adventuring 
+            adventuring = False
+            return              # Om du dör så slutar funk köras
+    print("Efter du dödat monsteret går du vidare")
+    time.sleep(3)  # import time
+    print("Du hinner bara gå ett par minuter innan du hör något mullra, du vänder dig om och ser massor stenar rulla mot dig")
+    
+    
 
 def skogsvägen():
     pass
@@ -144,20 +172,21 @@ def abanondedcity():
     pass
     
 def adventuring():      #funk som körs när man äventyrar
+    print("Du har lämnat byn och går på en väg") #Intro 
     while adventuring == True:
-        print("Du har valt att äventyra")   #Intro  
-        print("Du har lämnat byn och går på en väg")
         print("Du kommer till en skog där vägen försvinner till tre stigar")
         plats, gårhem = korsningen()
         if gårhem == "ja":
             adventuring=False
-            return           # returnera stats
-            break  # Slutar while loopen
+            break      # Slutar while loopen
         if plats == 1:
             grottvägen()
         elif plats == 2:
             skogsvägen()
-            
+        elif plats ==3:
+            abanondedcity()
+        
+
     return
 
 
@@ -173,8 +202,9 @@ while alive == True:
         """)
     Platsval = input("Var vill du gå")
     if Platsval == "1":
+        print("Du har valt att äventyra") 
+        adventuring = True
         pass
-        
         
 
     elif Platsval ==2: 
@@ -192,36 +222,46 @@ while alive == True:
     elif Platsval ==4:
         pass
     
-
-
-
-
-
 def battle(battling_monster, batteling_character):
 
     while Characterclass.hp > 0 and Monster.hp > 0:
         
+        battlec = input(f"Vad vill du göra?   Ditt liv{batteling_character.hp}hp,          Monstrets liv {battling_monster.hp} \n   1 Attackera     2. Heala    3. Försök att fly")
+        if battlec == "1": 
+            
+            dmg = batteling_character.str * batteling_character.weapon.damage
+            
+            all_critrate = batteling_character.critrate + batteling_character.weapon.critrate
+            if rand.random() <= all_critrate:
+                dmg *= batteling_character.crit_damage * batteling_character.weapon.crit_damage
+            
+            batteling_monster.Monster.hp -= dmg
+            Print("Du skadade {Monster.name} med {Characterclass.str}! Nu har {Monster.name} {Monster.hp} hp kvar.")
+        elif battlec == "2": 
+            pass
+                 # Heal
         
-        dmg = batteling_character.str * batteling_character.weapon.damage
-        if rand.random() <= Characterclass.critrate:
-            dmg *= Characterclass.crit_damage
-        
-        
-        Monster.hp -= dmg
-        Print("Du skadade {Monster.name} med {Characterclass.str}! Nu har {Monster.name} {Monster.hp} hp kvar.")
+        elif battlec == "3": 
+            flybattle = rand.randint(1,2)
+            if flybattle == 1:
+                return
+        else:
+            pass
 
         if Monster.hp <= 0:
             print("Du dödade monstret!")
-            reward = monster.exp_reward()
-            hero.add_exp(reward)
-            return reward
+            reward = battling_monster.exp_reward()
+            batteling_character.add_exp(exp)
+            return
 
-        Characterclass.hp -= Monster.dmg
+        batteling_character.Characterclass.hp -= batteling_character.Monster.dmg
 
-        if Characterclass.hp < 0:
+        if Characterclass.hp <= 0:
             print("Du blev besegrad av monstret!")
+            global alive
             alive = False
-            return alive
+            return
+        
 
 
 

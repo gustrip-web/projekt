@@ -12,9 +12,8 @@ class Weapon():
 
 
 class Items():
-    def __init__(self, name, health_boost, damage_boost, lvl):
+    def __init__(self, name, health_boost, damage_boost):
         self.health_boost = health_boost
         self.damage_boost = damage_boost
-        self.lvl = lvl
         self.name = name
     
