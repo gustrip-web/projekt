@@ -23,12 +23,10 @@ class Characterclass():
     def add_exp(self, reward):
         self.exp += reward
 
-        while self.exp >= 100:
-            self.exp -= (100*(1.2**self.lvl))
+        while self.exp >= self.exp_required():
+            self.exp -= self.exp_required
             self.lvl += 1
-            self.character_damage()
-            self.character_hp()
-
+            self.level_up()
 
 
 

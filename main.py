@@ -161,6 +161,12 @@ def grottvägen():
     print("Efter du dödat monsteret går du vidare")
     time.sleep(3)  # import time
     print("Du hinner bara gå ett par minuter innan du hör något mullra, du vänder dig om och ser massor stenar rulla mot dig")
+    print("Du lowkey ser ett smaband i stenarna, nummrena 13 98 flashar i din hjärna")
+    time.sleep(5)
+    os.system('cls')
+
+
+    
     
     
 
