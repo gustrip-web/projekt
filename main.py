@@ -133,10 +133,16 @@ def korsningen():
                  print(f"Du går {vägval}")  
     return plats, gårhem
 def vägdecision():         #Väg val på de olika vägarna
-    vägval3 = input("Vill du vända tillbaka= ja eller ner")
+    vägval3 = input("Vill du vända tillbaka? ja eller ner")
     if len(vägval3) == 2:
         vägsvar3 = 1      # Player vill vända tillbaka
     else: vägsvar = 2   #Vill forsätta
+    return vägsvar
+def vägescape():         #Väg val på de olika vägarna
+    vägval4 = input("Vill du gå vänster eller höger?")
+    if len(vägval3) == 6:
+        vägsvar3 = 1      # Player vill gå vänstern
+    else: vägsvar = 2   #Vill gå höger
     return vägsvar
 
 def monsterpullar():
@@ -147,7 +153,8 @@ def monsterpullar():
 
 def grottvägen():
     print("Efter ett tag kommer du till en Grotta")
-    print("Fuktig tunnel med droppande stalaktiter, svagt ljus från utgången bakom dig. Marken är hal och stenig.")
+    time.sleep(5)
+    print("En fuktig tunnel med droppande stalaktiter, svagt ljus från utgången bakom dig. Marken är hal och stenig.")
     if vägdecision() ==1:     #Om man vänder så kommer man tillbaka till vägvalet
         return
     else: #Forsätte
@@ -161,19 +168,95 @@ def grottvägen():
     print("Efter du dödat monsteret går du vidare")
     time.sleep(3)  # import time
     print("Du hinner bara gå ett par minuter innan du hör något mullra, du vänder dig om och ser massor stenar rulla mot dig")
-    print("Du lowkey ser ett smaband i stenarna, nummrena 13 98 flashar i din hjärna")
     time.sleep(5)
-    os.system('cls')
+    print("Du lowkey ser ett samband i stenarna, nummrena 13 98 flashar i din hjärna")
+    time.sleep(5)     #Låter användaren kolla på nummrerna
+    os.system('cls')  #Rensar temrinel 
+    stensvar = input("vilka var talen?  xx xx")
+    time.sleep(2)
+    if stensvar == "13 98":
+        print("Du fick rätt, du undivker stenarna")
+    else:
+        print("Du såg inte visionen och blev träffad av en sten") 
+        batteling_character.hp -= 10    #Tar bort liv från gubben
+        print(f"Du har nu {batteling_character.hp} hp")
+    print("Efter stenraset går du vidare")
+    time.sleep(5)
+    print("Efter ett tag kommer du till en korsning")
+    time.sleep(3)
+    print("En skylt sitter uppsatt, på den står det") 
+    time.sleep(3)
+    print("Gå vänster om du vill leva")
+    if vägescape() == 1:
+        print("Du går vänster")
+        time.sleep(3)
+        print("Grottan börjar snart ljusna och du känner luften bli varmare")
+        if vägdecision == 1: #playern vänder
+            print("Du vänder tillbaka")
+            time.sleep(3)
+            print("Du kommer tillbaka till korsning och går förbi skylten ")
+        else:
+            print("Du går upp ur grottan")
+            return               # Går upp ur grottan och cancela grott äventyret
+    else: 
+        print("Du trotsar skyltens råd och går höger")
+    time.sleep(3)
+    print("Gången krymper, luften blir kallare. Eko av droppande vatten hörs överallt.")
+    print("Grottan forsätter gå ner snart når vattnet dig upp till midjan")
+    print("Det är ")
+    
+    
 
-
-    
-    
-    
 
 def skogsvägen():
-    pass
-
-    
+    print("Efter ett tag kommer du fram till en mörk skog.")
+    time.sleep(1)
+    print("Du kliver in i den mörka skogen. Ljuset bakom dig försvinner nästan direkt när träden sluter sig över dig. Luften blir kylig och stilla. Något prasslar mellan stammarna, men du kan inte se vad. Skuggorna rör sig, och en obehaglig känsla kryper längs ryggen.")
+    time.sleep(4)
+    if vägdecision() ==1:
+        return
+    else:
+        print("Du går djupare in i skogen.")
+        time.sleep(2)
+        print("Efter ett tag hör du grenarna prassla bakom dig och du vänder dig snabbt om.")
+        monsterval = monsterpullar()
+        battle(monsterval, playerclass)
+        if alive == False:          # Alive ändras i battle func
+            global adventuring 
+            adventuring = False
+            return          
+    print("Efter du dödat monstret så fortsätter du in i den mörka skogen.")
+    time.sleep(3)
+    print("Du går sakta och samtdigt njuter av den lugna och stilla miljön.")
+    time.sleep(2)
+    print("Men helt plötsligt så börjar vinden ta sig och skyn går om till svart.")
+    time.sleep(2)
+    print("Det föredetta lugnet har nu gått om till en kraftfull storm och träden vajar rejält.")
+    time.sleep(2)
+    print("Bakifrån dig hörs ett högt knak och vänder dig om för att se ett gigantiskt träd falla mot din riktning")
+    time.sleep(3)
+    skogsträdfall =  int(input("""                            Vill du:
+1. Undvika vänster   2. Undvika höger   3. Slå sönder trädet oskadad"""))
+    if skogsträdfall ==1:
+        print("Du undvek trädet genom att göra en dramatisk rull åt vänster och kom ut oskaddad.")
+    elif skogsträdfall==2:
+        print("Du undvek trädet genom att göra en dramatisk rull åt höger och kom ut oskaddad.")
+    elif skogsträdfall ==3:
+        print("Du försökte stoppa trädet med all din kraft, men blir till slut mosad.")
+        global alive
+        alive == False 
+        global adventuring
+        adventuring== False
+        return
+    else:
+        print("Du svarade inte och hinner däför inte reagera på det fallande trädet.")
+        time.sleep(3)
+        print("Du dog.")
+        global alive
+        alive == False 
+        global adventuring
+        adventuring== False
+        return
 def abanondedcity():
     pass
     
