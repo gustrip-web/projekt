@@ -22,7 +22,7 @@ Weapon("Knogjärn", 2, 0.25, 1.25)]
 Item_list1 = [Item("Small_Health_Potion",15 ,0),
 Item("Medium_Helth_Potion", 30, 1),
 Item("Big_Health_Potion", 60, 1),
-Item("Damgae_boost", 0, 1.5)]
+Item("Damage_boost", 0, 1.5)]
 
 #Monster
 monster_list1= [Monster("Skeleton", 40, 20, 1), 
@@ -40,6 +40,8 @@ monster_list3= [Monter("Jätte", 400, 35, 1),
     Monster("Skuggriddare", 275, 50, 1),
     Monster("Golem", 450, 20, 1)]
 
+
+Plånbok = 0
 #Gameplay
 print("Welcome to the Sweelept")
 while True:
@@ -152,13 +154,28 @@ def monsterpullar():
 
 
 def grottvägen():
-    print("Efter ett tag kommer du till en Grotta")
-    time.sleep(5)
-    print("En fuktig tunnel med droppande stalaktiter, svagt ljus från utgången bakom dig. Marken är hal och stenig.")
+    print("Efter att gått på stigen en tag kommer du fram till en grott öppning")
+    time.sleep(2)
+    
+    print("Du kikar ner i den, grottan ser fuktig ut och har droppande stalaktiter")
     if vägdecision() ==1:     #Om man vänder så kommer man tillbaka till vägvalet
         return
     else: #Forsätte
         print("Du går ner i grottan")
+        time.sleep(2)
+        print("Det är brant och dina knän får jobba hårt")
+        time.sleep(2)
+        print("Plöstlsigt halkar du till och ramlar")
+        time.sleep(2)
+        print("Du tumlar neråt, det gör ont,")
+        time.sleep(2)
+        print("Efter vad som känns som en evighet så stannar du entligen")
+        time.sleep(2)
+        print("Du reser dig upp och kollar dig omkring")
+        time.sleep(2)
+        print("En lång rak grotta du inte kan se slutet på")
+        time.sleep(2)
+        print("I perferin ser du rörelser, du vänder dig snabbt om och ser nåting springa mot dig")
         monsterval = monsterpullar()
         battle(monsterval, playerclass)
         if alive == False:          # Alive ändras i battle func
@@ -202,10 +219,124 @@ def grottvägen():
         print("Du trotsar skyltens råd och går höger")
     time.sleep(3)
     print("Gången krymper, luften blir kallare. Eko av droppande vatten hörs överallt.")
+    time.sleep(2)
     print("Grottan forsätter gå ner snart når vattnet dig upp till midjan")
-    print("Det är ")
+    time.sleep(2)
+    print("Det är svängar överallt, det känns som lybyrint")
+    time.sleep(2)
+    print("Plötsligt hör du ett isande skrik bakom dig,")
+    time.sleep(2)
+    afb =input("Vill du, 1 Gå mot ljudet eller 2 gå vidare")
+    if afb == "1":
+        print("Du vänder dig om och börjar gå")
+        time.sleep(2)
+        print("Allt ser normalt ut, inget konstigt")
+        time.sleep(2)
+        print("Kanske inbildade du dig bara")
+        time.sleep(2)
+        print("Efter ett tag ser du nåt som glimmar på vägen")
+        time.sleep(2)
+        print("En stor guldtand, intryck i en glipa")
+        time.sleep(2)
+        print("Den här kan noga vara värd en kosing tänker du")
+    else:
+        print("Du forsäter gå framåt")
+        time.sleep(2)
+        print("Rarariarar!")
+        time.sleep(2)
+        print("Någonting drar dig ner under vattnet")
+        battle()
+    print("Du fick 20 guldmynt")      
+                 #Öka pengar varibeln
+    time.sleep(2)
+    print("Du går vidare fast du är trött")
+    time.sleep(2)
+    print("Långsamt börjar grottan bli torrare")
+    time.sleep(3)
+    print("Efter en stund märker du att marken blir mjukare, nästan som sand")
+    time.sleep(2)
+    print("Det luktar fuktigt och mögel, luften känns tung")
+    time.sleep(2)
+    print("Du hör ett svagt ljud av något som rör sig under sanden")
+    time.sleep(2)
+    choice = input("Vill du, 1 undersöka ljudet eller 2 fortsätta framåt? ")
+
+    if choice == "1":
+        print("Du hukar dig ner och tittar försiktigt")
+        time.sleep(2)
+        print("Ett par små ögon som iaktar dig från sanden..")
+        time.sleep(2)
+        print("Du drar fram ditt vapen och förbereder dig för strid!")     
+        battle()
+        time.sleep(2)
+        print("Efter striden andas du ut och fortsätter vidare")
+    else:
+        print("Du väljer att inte störa det mystiska ljudet och fortsätter framåt")
+        time.sleep(2)
+        print("Sanden knastrar under dina fötter och gångarna blir smalare")
+        print("Plötsligt ser du en stor hiss")
+        print("Den ser gammal ut men den kanska funkar")
+        hissvar = input("Vill du trycka på hissknappen?")
+        if hissvar.len == 2:
+            
     
-    
+
+
+
+    time.sleep(1)
+    print("Plötsligt öppnar grottan upp sig till en enorm sal")
+    time.sleep(2)
+    print("Takets stalaktiter glittrar av fukt, och små floder rinner kors och tvärs")
+    time.sleep(3)
+    print("I mitten av salen ser du något som får ditt hjärta att slå snabbare")
+    time.sleep(2)
+    print("En gigantisk, glittrande drake sover bland högar av guld och skatter")
+    time.sleep(2)
+    choice2 = input("Vill du, 1 smyga förbi draken eller 2 försöka ta lite skatt? ")
+
+    if choice2 == "1":
+        print("Du håller andan och smyger längs väggarna")
+        time.sleep(2)
+        print("Draken rör inte en muskel och du kommer fram till andra sidan salen")
+        print("Du känner dig nöjd men adrenalinet pumpar fortfarande")
+    else:
+        print("Du tar ett steg mot skatten")
+        print("Draken öppnar ett öga och låter ett öronbedövande vrål")
+        time.sleep(2)
+                          # Kalla draken som monster
+        battle()
+        print("Efter en hård strid lämnar du salen med en bit av skatten")
+    time.sleep(1)
+    print("När du går vidare från salen blir grottan smalare och luften varmare")
+    time.sleep(2)
+    print("Du börjar se ljus som sipprar in från små sprickor ovanför")
+    time.sleep(2)
+    print("Det känns som att du närmar dig grottans slut")
+    time.sleep(2)
+    print("Men plötsligt hör du ett eko av fotsteg bakom dig")
+    choice3 = input("Vill du, 1 vända dig om eller 2 fortsätta framåt snabbt? ")
+    if choice3 == "1":
+        print("Du vänder dig om och ser en grupp skuggfigurer")
+        time.sleep(2)
+        print("De verkar inte se dig än, kanske kan du smyga undan?")
+        stealth_choice = input("Vill du, 1 smyga undan eller 2 konfrontera dem? ")
+        if stealth_choice == "1":
+            print("Du kryper längs väggarna och lyckas ta dig förbi utan problem")
+        else:
+            print("Du drar fram ditt vapen och striden börjar")
+                       # Slåss mot mystical men
+            battle()
+    else:
+        print("Du rusar framåt och ignorerar fotstegen bakom dig")
+        time.sleep(2)
+        print("Pulsen dunkar i öronen men du känner ljuset bli starkare för varje steg")
+
+    time.sleep(1)
+    print("Slutligen når du grottans mynning")
+    time.sleep(2)
+    print("Solens ljus träffar ditt ansikte, och du andas den friska luften")
+    return
+
 
 
 def skogsvägen():
@@ -224,8 +355,11 @@ def skogsvägen():
         if alive == False:          # Alive ändras i battle func
             global adventuring 
             adventuring = False
-            return          
-    print("Efter du dödat monstret så fortsätter du in i den mörka skogen.")
+            return 
+    Plånbok+=20
+    print("Du fick 20 guldmynt eftersom att du beserade monstret!")
+    time.sleep(2)       
+    print("Efter fighten så fortsätter du in i den mörka skogen.")
     time.sleep(3)
     print("Du går sakta och samtdigt njuter av den lugna och stilla miljön.")
     time.sleep(2)
@@ -244,19 +378,49 @@ def skogsvägen():
     elif skogsträdfall ==3:
         print("Du försökte stoppa trädet med all din kraft, men blir till slut mosad.")
         global alive
-        alive == False 
+        alive = False 
         global adventuring
-        adventuring== False
+        adventuring = False
         return
     else:
-        print("Du svarade inte och hinner däför inte reagera på det fallande trädet.")
+        print("Du svarade inte korrekt och hinner därför inte reagera på det fallande trädet.")
         time.sleep(3)
         print("Du dog.")
         global alive
-        alive == False 
+        alive = False 
         global adventuring
-        adventuring== False
+        adventuring = False
         return
+    time.sleep(2)
+if vägdecision() ==1:
+    return
+else:
+    print("Efter katastrofen så fortsätter du djupare in i den mörka skogen medans du vandrar mellan de höga vajande träden, tills du känner att någonting inte riktigt stämmer.")
+    time.sleep(4)
+    print("2 röda ögon ses blinka mellan träden, och de verkar spana in just dig.")
+    time.sleep(2)
+    print("På mindre än en sekund löpar monstret och hoppar på dig!")
+    time.sleep(2)
+    monsterval = monsterpullar()
+    battle(monsterval, playerclass)
+    if alive == False:          # Alive ändras i battle func
+        global adventuring 
+        adventuring = False
+        return  
+    print("Efter ännu en till attack så känner du dig utmattad och fortsätter vandra med hopp om att du snart kommer ut ur denna läskiga skog.")
+    time.sleep(4)
+    print("Efter ett långt äventyr så ser du ett glimmer från skogens kant och bestämmer dig för att gå denns håll.")
+    time.sleep(3)
+    print("När du närmrar dig så inser du att det är en liten stuga.")
+    time.sleep(2)
+    Stuga_val=int(input("""                   Vill du:
+1. Gå in i stugan   2. Strunta i stugan och fortsätta vandra"""))
+    if Stuga_val ==1:
+        print("Du bestämmer dig för att ta dig in i stugan i hopp om resurser som kan hjälpa dig komma ut ur skogen.")
+    elif Stuga_val== 2:
+        print()
+    else:
+        print("Du gav inte ett giltigt svar, svara om.")
 def abanondedcity():
     pass
     
@@ -293,23 +457,85 @@ while alive == True:
     if Platsval == "1":
         print("Du har valt att äventyra") 
         adventuring = True
-        pass
-        
+        adventuring()
 
-    elif Platsval ==2: 
+    elif Platsval =="2": 
         print("Du har valt att gå till markanden")
 
-    elif Platsval ==3:
+    elif Platsval =="3":
         print("Du har valt att gå till biblloktekt")
+        bok_val = input("""        Vilken bok skulle du vilja läsa?
+                    1. Monster boken        2. Natur boken      3. Den vise mannen
+                    """)
+        if bok_val == "1":
+            monster_val = input("""    Vilket monster skulle du vilja läsa om?
+                            1. Skeleton     2. Goblin       3. Goon        4. Bandit
+                                            5. Troll        6. Varulv 
+                                                    q. Lämna
+            """)
+            if monster_val == "1":
+                print("""En forntida krigare vars själ aldrig fann ro. Benen är sammanbundna av förbannad vilja,
+                och i ögonhålorna lyser ett svagt blått sken. Skeletons vaknar där strider en gång rasade,
+                alltid redo att fortsätta ett krig som för länge sedan tagit slut.""")
+            elif monster_val == "2":
+                print("""Små, gröna och evigt irriterande. Goblins trivs i skuggorna där de skrattar åt sina egna dumma skämt.
+                Deras svaga kroppar gör dem fega, men deras hastighet och list gör dem farliga i grupp.
+                En ensam goblin är ett problem – en flock är en katastrof.
+                """)
+            elif monster_val == "3":
+                print(""" En trasig själ med en kropp som verkar ihopslängd av kaos självt. Goons är förvirrade, oberäkneliga och farliga.
+                De förstår inte rädsla, inte smärta och ibland inte ens att de är i en strid. Deras slumpslag kan vara både värdelösa – eller dödliga.
+                """)
+            elif monster_val == "4":
+                print("""En före detta människa som valde mörka vägar.
+                Deras snabbhet, vassa knivar och ännu vassare instinkter gör dem dödliga plågoandar längs vägarna.
+                Banditer attackerar inte för nöje – utan för överlevnad.
+                """)
+            elif monster_val == "5":
+                print(""" Troll föds ur jordens djup, formade av lera och sten.
+                De är långsamma i både huvud och kropp, men när de slår – skälver världen.
+                Många äventyrare föraktar troll, men få vet att deras hjärtan slår med sorg efter förlorade skogar.
+                """)
+            elif monster_val == "6":
+                print(""" En människa förbannad av månen. När skymningen faller förlorar de förståndet och förvandlas till en snabb, brutal predator.
+                Deras ylande ekar genom nattens skogar och deras klor lämnar djupa ärr i både trä och kött.
+                """)
+            else:
+                pass
+            continue
+        if bok_val == "2":
+            natur_val = input("""       Vilken natur vill du läsa om?
+                            1. Grottvägen       2 .Skogsvägen       3. Abanonded City
+            """)
+            if natur_val == "1":
+                print("""Grottvägen är en labyrint av trånga tunnlar och fuktiga gångar som har formats under tusentals år av rinnande vatten och erosion.
+                Droppstenar och stalaktiter hänger hotfullt från taket, och marken är halt och stenig.
+                Den här platsen har alltid varit en passage mellan världens yttre landskap och de djupare, hemliga underjordiska gångarna – fylld av mystik och faror.
+                """)
+            elif natur_val == "2":
+                print("""Skogsvägen slingrar sig genom täta skogar, där träden sträcker sig högt mot himlen och dimman ofta ligger tät mellan stammarna.
+                Marken är mjuk av mossa och fallna löv, och vinden får trädens grenar att knaka hotfullt.
+                Skogsvägen har funnits i århundraden som en naturlig passage för resande och äventyrare, men dess orörda djup rymmer både skönhet och fara
+                """)
+            elif natur_val == "3":
+                print("""Den övergivna staden är en ruin från en svunnen civilisation.
+                Krossade byggnader, trasiga gator och murar som rasat under tidens gång ger staden ett spöklikt utseende.
+                Staden byggdes en gång som ett centrum för handel och magi, men drabbades av okända katastrofer och övergavs.
+                Nu ekar tystnaden mellan ruinerna, och platsen bär på historiens mysterier och glömda hemligheter.
+                """)
+    elif Platsval =="4":
+        print()
+                                        #Stats allocation och stat check
+    else: 
+        print("Skriv ett nummer yaniii")
 
-    elif Platsval ==4:
-        print("gå till markanden")
 
-    elif Platsval ==3:
-        print("Du har valt att gå till biblloktekt")
 
-    elif Platsval ==4:
-        pass
+
+
+
+
+
     
 def battle(battling_monster, batteling_character):
 
@@ -323,9 +549,10 @@ def battle(battling_monster, batteling_character):
             all_critrate = batteling_character.critrate + batteling_character.weapon.critrate
             if rand.random() <= all_critrate:
                 dmg *= batteling_character.crit_damage * batteling_character.weapon.crit_damage
+                print(f"Du fick en crit!, nu gör du {dmg} skada")
             
             batteling_monster.Monster.hp -= dmg
-            Print("Du skadade {Monster.name} med {Characterclass.str}! Nu har {Monster.name} {Monster.hp} hp kvar.")
+            Print(f"Du skadade {Monster.name} med {Characterclass.str}! Nu har {Monster.name} {Monster.hp} hp kvar.")
         elif battlec == "2": 
             pass
                  # Heal

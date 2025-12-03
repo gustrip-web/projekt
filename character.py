@@ -11,6 +11,8 @@ class Characterclass():
         self.crit_damage = crit_damage
         self.critrate = critrate
 
+        self.inventory = []
+
     def exp_required(self):
         return int(100 * (1.2 ** (self.lvl - 1)))
 
@@ -22,13 +24,36 @@ class Characterclass():
     
     def add_exp(self, reward):
         self.exp += reward
-
         while self.exp >= self.exp_required():
-            self.exp -= self.exp_required
+            self.exp -= self.exp_required()
             self.lvl += 1
             self.level_up()
 
 
+    # -------------------------
+    # INVENTORY
+    # -------------------------
+    def add_item(self, item):
+        self.inventory.append(item)
+        print(f"Du plockade upp: {item.name}")
 
-    
+    def show_inventory(self):
+        if not self.inventory:
+            print("Inventory är tomt.")
+            return
 
+        print("\n--- INVENTORY ---")
+        for i, item in enumerate(self.inventory, start=1):
+            print(f"{i}. {item.name} (+{item.health_boost} HP, +{item.damage_boost} DMG)")
+        print("------------------\n")
+
+    def use_item(self, item_name):
+        for item in self.inventory:
+            if item.name.lower() == item_name.lower():
+                self.hp += item.health_boost
+                self.str += item.damage_boost
+                print(f"Du använde {item.name}!")
+                print(f"Ny HP: {self.hp}, Ny DMG: {self.str}")
+                self.inventory.remove(item)
+                return
+        print("Du har inte det föremålet!")

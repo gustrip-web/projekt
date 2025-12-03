@@ -11,7 +11,7 @@ class Weapon():
 
 
 
-class Items():
+class Item():
     def __init__(self, name, health_boost, damage_boost):
         self.health_boost = health_boost
         self.damage_boost = damage_boost
