@@ -523,6 +523,10 @@ while alive == True:
                 Staden byggdes en gång som ett centrum för handel och magi, men drabbades av okända katastrofer och övergavs.
                 Nu ekar tystnaden mellan ruinerna, och platsen bär på historiens mysterier och glömda hemligheter.
                 """)
+            else:
+                pass
+            continue
+        if bok_val == "3"
     elif Platsval =="4":
         print()
                                         #Stats allocation och stat check
