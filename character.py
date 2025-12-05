@@ -30,9 +30,7 @@ class Characterclass():
             self.level_up()
 
 
-    # -------------------------
-    # INVENTORY
-    # -------------------------
+# INVENTORY
     def add_item(self, item):
         self.inventory.append(item)
         print(f"Du plockade upp: {item.name}")
