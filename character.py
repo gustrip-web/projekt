@@ -8,8 +8,10 @@ class Characterclass():
         self.str = str
         self.lvl = 1
         self.exp = 0
+        self.money = 0
         self.crit_damage = crit_damage
         self.critrate = critrate
+        self.alive = True
 
         self.inventory = []
 
@@ -19,7 +21,7 @@ class Characterclass():
     def level_up(self):
         self.lvl += 1
         self.str *= 1.10
-        self.hp *= 1.01
+        self.hp *= 1.05
         print(f"{self.name} levla upp till {self.lvl}!")
     
     def add_exp(self, reward):
@@ -28,6 +30,11 @@ class Characterclass():
             self.exp -= self.exp_required()
             self.lvl += 1
             self.level_up()
+    
+    def amoney(self, belopp):
+        self.money += belopp
+        print(f" Du har nu {self.money} pengar")
+        
 
 
 # INVENTORY
