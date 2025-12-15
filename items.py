@@ -1,14 +1,9 @@
-import random as rand
-
 class Weapon():
     def __init__(self, name, damage, critrate, crit_damage):
         self.name = name
         self.damage = damage
         self.critrate = critrate
         self.crit_damage = crit_damage
-
-
-
 
 
 class Item():
