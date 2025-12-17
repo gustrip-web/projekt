@@ -594,99 +594,85 @@ def abanondedcity():
     time.sleep(4)
     print("Det var nästan som att staden är övergiven.")
     time.sleep(2)
-    print("När du funderar på vart du ska ta vägen så ser du en hög skyskrapa som bara kallar ditt namn. Men sekunden du tänkte ändra din gåriktning så ser du en otroligt fint historiemuseum i din ögonvrå.")
-    time.sleep(6)
+    print("När du funderar på vart du ska ta vägen så ser du en hög skyskrapa som bara kallar ditt namn och du bestämmer dig för att gå dit.")
+    time.sleep(4)
+    print("Du tar dig genom de övergivna gatorna och efter en lång vandring så kommer du äntligen fram till en otroligt höga byggnaden.")
+    time.sleep(5)
+    print("Du går in genom porten på den föredetta lyxiga byggnaden i hopp om att hitta resureser.")
+    time.sleep(3)
+    print("Du kollar runt i den lyxiga entrén som ser oväntande fräsh ut.")
+    time.sleep(2)
+    print("Allt verkar alldels för avkopplande tills...")
+    time.sleep(2)
+    alive = battle(monsterval, playerclass, alive)
+    if alive == False:        # Alive ändras i battle func
+        return playerclass.alive 
+    if vägdecision() ==1:
+        print("Du bestämmer dig för att vända tillbaks.")
+        return
+    print("Efter fighten så fortsätter gå runt i skyskrapan tills du hittar ett par trappor.")
+    time.sleep(3)
     while True:
         try:
-            abandonedcitywalkchoice = int(input("""#Till vilken byggnad vill du gå till?:
-           # 1. Skyskrapan        2. Museumet """))
-            if abandonedcitywalkchoice == 1:
-                print("Du bestämmer dig för att gå till skyskrapan.")
+            trapporupellerner = int(input("""Vill du:
+            1. Gå ner för trappan     2. Gå upp för trappan
+            """))
+            if trapporupellerner == 1:
+                time.sleep(1)
+                print("Du bestämde dig för att gå upp från trappan.")
                 time.sleep(2)
-                print("Du tar dig genom de övergivna gatorna och efter en lång vandring så kommer du äntligen fram till en otroligt höga byggnaden.")
+                print("Denna våning verkar vara ett gammalt spelrum med otroligt många olika maskiner och kortspel.")
+                time.sleep(3)
+                print("Du kollar på alla olika slotmachines och märker att en av dem skapar ett konstigt pling ljud.")
+                time.sleep(3)
+                print("Du går fram till maskinen och bestämmer dig för att slå lite på den i hopp om att den kanske fortfarande fungerar.")
+                time.sleep(3)
+                print("Helt plötsligt så börjar den spela ett högt ljud och en lucka öppnar sig.")
+                time.sleep(2) 
+                print("Ut kom runt 20 mynt, det värkar vara din lyckodag!")
+                time.sleep(2)
+                print("Du plockar upp mynten och går din väg.")
+                amoney(20)
+                break
+                        
+            elif trapporupellerner == 2:
+                time.sleep(1)
+                print("Du bestämde dig för att gå ner för trappan.")
+                time.sleep(2)
+                print("Det verkar som att du gått in på föredetta garagevåningen.")
+                time.sleep(2)
+                print("Det finns lyxiga bilar på din vänster och höger men den som faktiskt väcker ditt intresse är en gammal mint condition Volkswagen Golf.")
+                time.sleep(3)
+                print("Du går fram till den vackra bilen och bestämmer dig för att se om den fungerar så du bryter dig in via fönsterrutan.")
+                time.sleep(3)
+                print("Solklart glömmer du ju bort att det behövs nycklar så du går ut ur bilen i misstro fast någonting glimmade till i baksätet och bestämmer dig för att tar ännu en tit in i bilen.")
                 time.sleep(5)
-                print("Du går in genom porten på den föredetta lyxiga byggnaden i hopp om att hitta resureser.")
-                time.sleep(3)
-                print("Du kollar runt i den lyxiga entrén som ser oväntande fräsh ut.")
-                time.sleep(2)
-                print("Allt verkar alldels för avkopplande tills...")
-                time.sleep(2)
-                alive = battle(monsterval, playerclass, alive)
-                if alive == False:        # Alive ändras i battle func
-                    return playerclass.alive 
-                print("Efter fighten så fortsätter gå runt i skyskrapan tills du hittar ett par trappor.")
-                time.sleep(3)
+                print("Det visade sig vara ett golfsett.")
+                time.sleep(1)
                 while True:
                     try:
-                        trapporupellerner = int(input("""Vill du:
-                        1. Gå ner för trappan     2. Gå upp för trappan
-                        """))
-                        if trapporupellerner == 1:
-                            time.sleep(1)
-                            print("Du bestämde dig för att gå upp från trappan.")
-                            time.sleep(2)
-                            print("Denna våning verkar vara ett gammalt spelrum med otroligt många olika maskiner och kortspel.")
-                            time.sleep(3)
-                            print("Du kollar på alla olika slotmachines och märker att en av dem skapar ett konstigt pling ljud.")
-                            time.sleep(3)
-                            print("Du går fram till maskinen och bestämmer dig för att slå lite på den i hopp om att den kanske fortfarande fungerar.")
-                            time.sleep(3)
-                            print("Helt plötsligt så börjar den spela ett högt ljud och en lucka öppnar sig.")
-                            time.sleep(2) 
-                            print("Ut kom runt 20 mynt, det värkar vara din lyckodag!")
-                            time.sleep(2)
-                            print("Du plockar upp mynten och går din väg.")
-                            amoney(20)
+                        time.sleep(2)
+                        Tauppbackseatweapon = int(input(f"""Vill du plocka upp en golfklubba och byta ut den mot ditt nuvarande vapnet {Weapon.name}?
+                        1. Ja     2. Nej"""))
+                        if Tauppbackseatweapon == 1:
+                            print(f"Du bytte ut {Weapon.name} mot en golfklubba")
+                            Vapen = Weapon("Golfklubba")
+                            playerclass.weapon = Vapen
                             break
-                        
-                        elif trapporupellerner == 2:
-                            time.sleep(1)
-                            print("Du bestämde dig för att gå ner för trappan.")
-                            time.sleep(2)
-                            print("Det verkar som att du gått in på föredetta garagevåningen.")
-                            time.sleep(2)
-                            print("Det finns lyxiga bilar på din vänster och höger men den som faktiskt väcker ditt intresse är en gammal mint condition Volkswagen Golf.")
-                            time.sleep(3)
-                            print("Du går fram till den vackra bilen och bestämmer dig för att se om den fungerar så du bryter dig in via fönsterrutan.")
-                            time.sleep(3)
-                            print("Solklart glömmer du ju bort att det behövs nycklar så du går ut ur bilen i misstro fast någonting glimmade till i baksätet och bestämmer dig för att tar ännu en tit in i bilen.")
-                            time.sleep(5)
-                            print("Det visade sig vara ett golfsett.")
-                            time.sleep(1)
-                            while True:
-                                try:
-                                    time.sleep(2)
-                                    Tauppbackseatweapon = int(input(f"""Vill du plocka upp en golfklubba och byta ut den mot ditt nuvarande vapnet {Weapon.name}?
-                                    1. Ja     2. Nej"""))
-                                    if Tauppbackseatweapon == 1:
-                                        print(f"Du bytte ut {Weapon.name} mot en golfklubba")
-                                        Vapen = Weapon("Golfklubba")
-                                        playerclass.weapon = Vapen
-                                        break
-                                    elif Tauppbackseatweapon == 2:
-                                        print(f"Du behöll {Weapon.name} som ditt vapen.")
-                                        break
-                                    else:
-                                        print("Du gav inte ett giltigt svar, svara om.")
-                                except:
-                                    print("Du gav inte ett giltigt svar, svara om.")
-                            
-                            print("Efteråt återvände du tillbaks till stadens gator ")
+                        elif Tauppbackseatweapon == 2:
+                            print(f"Du behöll {Weapon.name} som ditt vapen.")
                             break
-                        
                         else:
                             print("Du gav inte ett giltigt svar, svara om.")
                     except:
                         print("Du gav inte ett giltigt svar, svara om.")
-                
-                    break
-            
-            elif abandonedcitywalkchoice == 2:
-                
+                            
+                print("Efteråt återvände du tillbaks till stadens gator ")
                 break
+                        
             else:
                 print("Du gav inte ett giltigt svar, svara om.")
-        except: 
+        except:
             print("Du gav inte ett giltigt svar, svara om.")
 
 
