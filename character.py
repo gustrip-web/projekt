@@ -11,6 +11,7 @@ class Characterclass():
         self.money = 0
         self.crit_damage = crit_damage
         self.critrate = critrate
+        self.weapon = None
         self.alive = True
 
         self.inventory = []
