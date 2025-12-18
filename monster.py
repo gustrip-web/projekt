@@ -8,3 +8,6 @@ class Monster():
 
     def exp_reward(self):
         return rand.randint(10,35)
+    
+    def money_reward(self):
+        return rand.randint(5, 15)

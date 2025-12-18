@@ -56,7 +56,9 @@ while True:
      
             5. Choose your class
      """)
+    time.sleep(2)
     infosvar = input("Vad vill du göra? ")
+    time.sleep(2)
     if infosvar == "1":
         print("""
         Född på slagfälten där stål möter storm,
@@ -97,7 +99,9 @@ while True:
           1. Warrior               3. Tank
           2. Magiacan              4. Gambler
           """)
+        time.sleep(2)
         val = (input("Vilken karaktär vill du välja? "))
+        time.sleep(1)
         if val == "1":
             playerclass = warrior
             print("Du valde klassen Warrior!")
@@ -166,51 +170,86 @@ def Markanden():
     print("vällkomen till markanden")
     time.sleep(2)
     while True:
-        print(""" Vad vill du kolla på 
-        Vapen: 1. Svärd      Damage:  3 Crit factor: 5/10
-            2. Dolk        Damage: 2  Crit factor: 6/10
-            3. Smörknikv   Damage: 1,25  Crit factor: 2/10
-            4. Yxa      Damage: 4  Crit factor:   2/10
-            5. Knogjärn   Damage: 2  Crit factor:  7/10
+        print(f""" Vad vill du kolla på?        DU har {playerclass.money} guld
+        Vapen: 1. Svärd      Damage: 3     Crit factor: 5/10    Pris: 30 guld
+            2. Dolk          Damage: 2     Crit factor: 6/10    Pris: 20 guld
+            3. Smörknikv     Damage: 1,05  Crit factor: 2/10    Pris: 5 guld
+            4. Yxa           Damage: 4     Crit factor: 2/10    Pris: 40 guld
+            5. Knogjärn      Damage: 2     Crit factor: 7/10    Pris: 30 guld
 
-        Items: 6. Small Health Potion    + 15 Hp
-            7. Medium Helth Potion    + 30 Hp
-            8. Big Health Potion      + 60 Hp
-            9. Damage boost           10 % Damage boost
-            q. Lämna affären
+        Items: 6. Small Health Potion    + 15 Hp            Pris: 10 guld
+               7. Medium Helth Potion    + 30 Hp            Pris: 20 guld
+               8. Big Health Potion      + 60 Hp            Pris: 30 guld
+               9. Damage boost           10 % Damage boost  Pris: 40 guld
+               q. Lämna affären
         """)
         köpval = input("Vad vill du köpa")
         time.sleep(2)
-        if köpval == "1":
-            Vapen = weapon_list1[0]
-            playerclass.weapon = Vapen
-            print(f"Ditt nya vapen är ett Svärd!")
-        elif köpval == "2":
-            Vapen = weapon_list1[1]
-            playerclass.weapon = Vapen
+        if köpval == "1":   #Svärd
+            if Characterclass.money >= 30:
+                amoney(-30)
+                Vapen = weapon_list1[0]
+                playerclass.weapon = Vapen
+                print(f"Ditt nya vapen är ett Svärd!")
+            else:
+                print("Du har inte tillräckligt med pengar")
+        elif köpval == "2":  #dolk
+            if Characterclass.money >= 20:
+                amoney(-20)
+                Vapen = weapon_list1[0]
+                playerclass.weapon = Vapen
             print("Ditt nya vappen är en Dolk")
-        elif köpval == "3":
-            Vapen = weapon_list1[2]
-            playerclass.weapon = Vapen
-            print("Ditt nya vappen är Smörkniv")
-        elif köpval == "4":
-            Vapen = weapon_list1[3]
-            playerclass.weapon = Vapen
-            print("Ditt nya vappen är Yxa")
-        elif köpval == "5":
-            Vapen = weapon_list1[4]
-            playerclass.weapon = Vapen
-            print("Ditt nya vappen är Knogjärn")
+        elif köpval == "3":  #Smörkniv
+            if Characterclass.money >= 10:
+                amoney(-10)
+                Vapen = weapon_list1[1]
+                playerclass.weapon = Vapen
+                print("Ditt nya vappen är Smörkniv")
+            else:
+                print("Du har inte tillräckligt med pengar")
+        elif köpval == "4":   #YXA
+            if playerclassclass.money >= 40:
+                amoney(-40)
+                Vapen = weapon_list1[2]
+                playerclass.weapon = Vapen
+                print("Ditt nya vappen är Yxa")
+            else:
+                print("Du har inte tillräckligt med pengar")
+        elif köpval == "5":    #Knogjärn
+            if playerclass.money >= 30:
+                amoney(-30)
+                Vapen = weapon_list1[30]
+                playerclass.weapon = Vapen
+                print("Ditt nya vappen är Knogjärn")
+            else:
+                print("Du har inte tillräckligt med pengar")
         elif köpval == "6":
-            add_item("Small_Health_Potion")
+            if Characterclass.money >= 10:
+                amoney(-10)
+                add_item("Small_Health_Potion")
+            else:
+                print("Du har inte tillräckligt med pengar")
         elif köpval == "7":
-            add_item("Medium_Helth_Potion")
+            if Characterclass.money >= 20:
+                amoney(-20)
+                add_item("Medium_Helth_Potion")
+            else:
+                print("Du har inte tillräckligt med pengar")
         elif köpval == "8":
-            add_item("Big_Health_Potion")
+            if Characterclass.money >= 30:
+                amoney(-30)
+                add_item("Big_Health_Potion")
+            else:
+                print("Du har inte tillräckligt med pengar")
         elif köpval == "9":
-            add_item("Damage_boost")
+            if Characterclass.money >= 40:
+                amoney(-40)
+                add_item("Damage_boost")
+            else:
+                print("Du har inte tillräckligt med pengar")
         elif köpval == "q":
             break
+
     return 
     
 
@@ -275,9 +314,13 @@ def battle(monsterval, playerclass, alive):
         if monsterval.hp <= 0:
             print("Du dödade monstret!")
             time.sleep(1)
-            print(f"Du tjänade {monsterval.exp_reward} exp")
+            print(f"Du tjänade {monsterval.exp_reward} exp och fick {monsterval.money_reward} guld")
             reward = monsterval.exp_reward()
             playerclass.add_exp(reward)
+            belopp = monsterval.money_reward()
+            playerclass.amoney(reward)
+            
+            
             return
         print(f"{monsterval.name} attackerar dig och gör {monsterval.dmg} skada!")
         playerclass.hp -= monsterval.dmg
@@ -678,9 +721,10 @@ def abanondedcity():
 
 
 def biblloktekt():
+    while True:
             bok_val = int(input("""        Vilken bok skulle du vilja läsa?
                         1. Monster boken        2. Natur boken      3. Den vise mannen
-                                                q. Gå tillbaka
+                                                4. Gå tillbaka
                         """))
             while True:
                 try:
@@ -756,6 +800,10 @@ def biblloktekt():
                     
                     elif bok_val == 3:
                         print("Godag Godag")
+                        continue
+                    
+                    elif bok_val == 4: 
+                        break
                 except:
                     print("Skriv om och skriv rätt")
 
@@ -765,17 +813,19 @@ def biblloktekt():
 
 def main(alive):
     while alive == True:
+        time.sleep(1)
         print(f"""          Sweelept
         1. Äventyr       2. Markanden       3. Bibloteket
     
                     4. Stats allocation
             """)
+        time.sleep(1)
         Platsval = input("Vad vill du välja? ")
         if Platsval == "1":
             print("Du har valt att äventyra!")
             time.sleep(1)
             print("Du traskar ut ur staden och snart uppenbarare sig en skog där vägen försvinner till tre stigar")
-            time.sleep(3)
+            time.sleep(2)
 
             plats = korsningen()
             if plats == "ja":
