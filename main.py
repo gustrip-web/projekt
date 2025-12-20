@@ -56,9 +56,9 @@ while True:
      
             5. Choose your class
      """)
-    time.sleep(2)
+    
     infosvar = input("Vad vill du göra? ")
-    time.sleep(2)
+    
     if infosvar == "1":
         print("""
         Född på slagfälten där stål möter storm,
@@ -99,9 +99,9 @@ while True:
           1. Warrior               3. Tank
           2. Magiacan              4. Gambler
           """)
-        time.sleep(2)
+        
         val = (input("Vilken karaktär vill du välja? "))
-        time.sleep(1)
+        
         if val == "1":
             playerclass = warrior
             print("Du valde klassen Warrior!")
@@ -252,10 +252,84 @@ def Markanden():
             break
         else:
             continue
-
-
     return 
-    
+
+def spin_number():
+    n = 0.008
+    for delay in [n]*129:
+        o = rand.randint(1, 4)      
+        if o == 1:
+            b = "🍒"         
+        elif o == 2:
+            b = "🔔" 
+        elif o == 3:
+            b = "🍋"
+        elif o == 4:
+            b = "💎"
+
+        print(f"\rSpinning: {b}", end=""  , flush=True)
+        time.sleep(n)
+        n += n*n
+
+
+    if o == 1:
+            b = "🍒"         
+    elif o == 2:
+            b = "🔔" 
+    elif o == 3:
+            b = "🍋"
+    elif o == 4:
+            b == "💎"
+    print(f"\rResult:   {b} ")
+    return b
+
+def slots():
+    slowtype("Välkomen till slotsen", 0.1)
+    slowtype("Slots är ett awesome sätt att vinna pengar på", 0.1)
+    slowtype("Du måste få tre av samma nummer för att kamma in stor vinsten som är 50", 0.1)
+    slowtype("varje spin kostar 5 guld", 0.1)
+    while True:
+        print(f"Du har {playerclass.money} guld")
+        if playerclass.money >= 1:
+            slot = input("Vill du spinna? Ja / nej")
+            if slot == "nej":           # Gjort med mening för just här måste man säga exact rätt för att dra
+                slowtype("kom tillbaka tills slots snart, nästa vinst är bara ett drag ifrån!", 0.1)
+            else: 
+                playerclass.amoney(-5)
+                slot1 = spin_number()
+                slot2 = spin_number()
+                slot3 = spin_number()
+        
+            if slot1 == slot2 and slot2 == slot3:
+                print("Du vann")
+                playerclass.amoney(50)
+            else:
+                print("Du förlora")
+        else:
+            print("Du har för lite pengar")
+            break
+    return
+
+def casion():
+    slowtype("Välkomen till casionot", 0.1)
+    while True:
+        slowtype(f""" Vad vill du göra?     Du har {playerclass.money} guld \n
+              1. Slots   2. Spela Black Jack    3. Baren   \n
+              4. Poker            5. Quiz                6. Gå tillbaka""", 0.1)
+        casval = input("Vad vill du göra?")
+        if casval == "1":
+            slowtype("Du har valt att spela slots", 0.1)
+            slots()
+        elif casval == "2":
+            slowtype("Du har valt att spela Black Jack", 0.1)
+        elif casval == "3":
+            slowtype("Du har valt att gå till baren", 0.1)
+        elif casval == "4":
+            slowtype("Du har valt att spela Poker", 0.1)
+        elif casval == "5":
+            slowtype("Du har valt att spela Quiz", 0.1)
+        elif casval == "6":
+            break
 
 def vägescape():  # Väg val på de olika vägarna
     vägval4 = input("Vill du gå vänster eller höger?")
@@ -274,14 +348,22 @@ def monsterpullar():
     else:
         monsterlista = monster_list3
     monsterval = rand.choice(monsterlista)
-    print("Du ser monstret {monsterval.name}")
+    print(f"Du ser monstret {monsterval.name}")
     return monsterval
+
+def slowtype(text, tid):
+    for a in text:
+        print(a, end="", flush=True)   # End hindrar nyrad,    flush låter termineln skriva ut induviduella tecken innan hela raden är klar
+        time.sleep(tid)
+    print("\n")
+
+
 
 def battle(monsterval, playerclass, alive):
     while playerclass.hp > 0 and monsterval.hp > 0:
 
         battlec = input(f"""Vad vill du göra?   Du har {playerclass.hp} hp,
-        Monstrets har {monstervalr.hp} hp
+        {monsterval.name} har {monsterval.hp} hp
         1. Attackera
         2. Heala
         3. Försök att fly """)
@@ -335,7 +417,7 @@ def battle(monsterval, playerclass, alive):
             playerclass.alive = False
             return playerclass
 
-def grottvägen():
+def grottvägen(alive):
     print("Efter att gått på stigen en tag kommer du fram till en grott öppning")
     time.sleep(2)
 
@@ -430,7 +512,7 @@ def grottvägen():
             return playerclass.alive
             
     print("Du fick 15 guldmynt")
-    amoney(15)
+    playerclass.amoney(15)
     # Öka pengar varibeln
     time.sleep(2)
     print("Du går vidare fast du är trött")
@@ -524,11 +606,11 @@ def grottvägen():
     time.sleep(1)
     print("Slutligen når du grottans mynning")
     time.sleep(2)
-    print("Solens ljus träffar ditt ansikte, och du andas den friska luften")
+    print("Solens ljus träffar ditt ansikte, och du andas de1n friska luften")
     return 
 
 
-def skogsvägen():
+def skogsvägen(alive):
     print("Efter ett tag kommer du fram till en mörk skog.")
     time.sleep(1)
     print("Du kliver in i den mörka skogen. Ljuset bakom dig försvinner nästan direkt när träden sluter sig över dig. Luften blir kylig och stilla. Något prasslar mellan stammarna, men du kan inte se vad. Skuggorna rör sig, och en obehaglig känsla kryper längs ryggen.")
@@ -632,7 +714,7 @@ def skogsvägen():
             print("Du gav inte ett giltigt svar, svara om.")
 
 
-def abanondedcity():
+def abanondedcity(alive):
     print("Efter ett tag kommer du fram till vad du tror är en helt vanlig stad.")
     time.sleep(3)
     print("Men du märker att någonting är fel.")
@@ -651,6 +733,7 @@ def abanondedcity():
     time.sleep(2)
     print("Allt verkar alldels för avkopplande tills...")
     time.sleep(2)
+    monsterval = monsterpullar()
     alive = battle(monsterval, playerclass, alive)
     if alive == False:        # Alive ändras i battle func
         return playerclass.alive 
@@ -723,16 +806,15 @@ def abanondedcity():
             print("Du gav inte ett giltigt svar, svara om.")
 
 
-
 def biblloktekt():
     while True:
-            bok_val = int(input("""        Vilken bok skulle du vilja läsa?
-                        1. Monster boken        2. Natur boken      3. Den vise mannen
+            bok_val = int(input("""        Var vill du gå?
+                        1. Monster boks hyllan        2. Natur boks hyllan      3. Den vise mannen
                                                 4. Gå tillbaka
                         """))
-            while True:
-                try:
-                    if bok_val == 1:
+            
+
+            if bok_val == 1:
                         monster_val = int(input("""    Vilket monster skulle du vilja läsa om?
                                         1. Skeleton     2. Goblin       3. Goon        4. Bandit
                                                         5. Troll        6. Varulv 
@@ -740,32 +822,32 @@ def biblloktekt():
                         """))
                         try:
                             if monster_val == 1:
-                                    print("""En forntida krigare vars själ aldrig fann ro. Benen är sammanbundna av förbannad vilja,
-                                    och i ögonhålorna lyser ett svagt blått sken. Skeletons vaknar där strider en gång rasade,
-                                    alltid redo att fortsätta ett krig som för länge sedan tagit slut.""")
+                                    slowtype("""En forntida krigare vars själ aldrig fann ro. Benen är sammanbundna av förbannad vilja,\n
+och i ögonhålorna lyser ett svagt blått sken. Skeletons vaknar där strider en gång rasade,
+alltid redo att fortsätta ett krig som för länge sedan tagit slut.""", 0.05)
                             elif monster_val == 2:
-                                    print("""Små, gröna och evigt irriterande. Goblins trivs i skuggorna där de skrattar åt sina egna dumma skämt.
-                                    Deras svaga kroppar gör dem fega, men deras hastighet och list gör dem farliga i grupp.
-                                    En ensam goblin är ett problem – en flock är en katastrof.
-                                    """)
+                                    slowtype("""Små, gröna och evigt irriterande. Goblins trivs i skuggorna där de skrattar åt sina egna dumma skämt.\n
+Deras svaga kroppar gör dem fega, men deras hastighet och list gör dem farliga i grupp.\n
+En ensam goblin är ett problem – en flock är en katastrof.
+""", 0.05)
                             elif monster_val == 3:
-                                    print(""" En trasig själ med en kropp som verkar ihopslängd av kaos självt. Goons är förvirrade, oberäkneliga och farliga.
-                                    De förstår inte rädsla, inte smärta och ibland inte ens att de är i en strid. Deras slumpslag kan vara både värdelösa – eller dödliga.
-                                    """)
+                                    slowtype(""" En trasig själ med en kropp som verkar ihopslängd av kaos självt. Goons är förvirrade, oberäkneliga och farliga.\n
+De förstår inte rädsla, inte smärta och ibland inte ens att de är i en strid. Deras slumpslag kan vara både värdelösa – eller dödliga.
+""", 0.05)
                             elif monster_val == 4:
-                                    print("""En före detta människa som valde mörka vägar.
-                                    Deras snabbhet, vassa knivar och ännu vassare instinkter gör dem dödliga plågoandar längs vägarna.
-                                    Banditer attackerar inte för nöje – utan för överlevnad.
-                                    """)
+                                    slowtype("""En före detta människa som valde mörka vägar.\n
+Deras snabbhet, vassa knivar och ännu vassare instinkter gör dem dödliga plågoandar längs vägarna.\n
+Banditer attackerar inte för nöje – utan för överlevnad.
+""", 0.05)
                             elif monster_val == 5:
-                                    print(""" Troll föds ur jordens djup, formade av lera och sten.
-                                    De är långsamma i både huvud och kropp, men när de slår – skälver världen.
-                                    Många äventyrare föraktar troll, men få vet att deras hjärtan slår med sorg efter förlorade skogar.
-                                    """)
+                                    slowtype(""" Troll föds ur jordens djup, formade av lera och sten.\n
+De är långsamma i både huvud och kropp, men när de slår – skälver världen.\n
+Många äventyrare föraktar troll, men få vet att deras hjärtan slår med sorg efter förlorade skogar.
+                                    """, 0.05)
                             elif monster_val == 6:
-                                    print(""" En människa förbannad av månen. När skymningen faller förlorar de förståndet och förvandlas till en snabb, brutal predator.
-                                    Deras ylande ekar genom nattens skogar och deras klor lämnar djupa ärr i både trä och kött.
-                                    """)
+                                    slowtype(""" En människa förbannad av månen. När skymningen faller förlorar de förståndet och förvandlas till en snabb, brutal predator.\n
+Deras ylande ekar genom nattens skogar och deras klor lämnar djupa ärr i både trä och kött.
+""", 0.05)
                             elif monster_val == 7:
                                 break
                             else:
@@ -773,28 +855,28 @@ def biblloktekt():
                         except:
                             print("Skriv om skriv rätt")
 
-                    elif bok_val == 2:
+            elif bok_val == 2:
                         try:
                             natur_val = int(input("""       Vilken natur vill du läsa om?
                                         1. Grottvägen       2. Skogsvägen       3. Abanonded City
                                                             4. Lämna
                             """))
                             if natur_val == 1:
-                                print("""Grottvägen är en labyrint av trånga tunnlar och fuktiga gångar som har formats under tusentals år av rinnande vatten och erosion.
-                                Droppstenar och stalaktiter hänger hotfullt från taket, och marken är halt och stenig.
-                                Den här platsen har alltid varit en passage mellan världens yttre landskap och de djupare, hemliga underjordiska gångarna – fylld av mystik och faror.
-                                """)
+                                slowtype("""Grottvägen är en labyrint av trånga tunnlar och fuktiga gångar som har formats under tusentals år av rinnande vatten och erosion.\n
+Droppstenar och stalaktiter hänger hotfullt från taket, och marken är halt och stenig.\n
+Den här platsen har alltid varit en passage mellan världens yttre landskap och de djupare, hemliga underjordiska gångarna – fylld av mystik och faror.
+""", 0.05)
                             elif natur_val == 2:
-                                print("""Skogsvägen slingrar sig genom täta skogar, där träden sträcker sig högt mot himlen och dimman ofta ligger tät mellan stammarna.
-                                Marken är mjuk av mossa och fallna löv, och vinden får trädens grenar att knaka hotfullt.
-                                Skogsvägen har funnits i århundraden som en naturlig passage för resande och äventyrare, men dess orörda djup rymmer både skönhet och fara
-                                """)
+                                slowtype("""Skogsvägen slingrar sig genom täta skogar, där träden sträcker sig högt mot himlen och dimman ofta ligger tät mellan stammarna.\n
+Marken är mjuk av mossa och fallna löv, och vinden får trädens grenar att knaka hotfullt.\n
+Skogsvägen har funnits i århundraden som en naturlig passage för resande och äventyrare, men dess orörda djup rymmer både skönhet och fara\n
+""", 0.05)
                             elif natur_val == 3:
-                                print("""Den övergivna staden är en ruin från en svunnen civilisation.
-                                Krossade byggnader, trasiga gator och murar som rasat under tidens gång ger staden ett spöklikt utseende.
-                                Staden byggdes en gång som ett centrum för handel och magi, men drabbades av okända katastrofer och övergavs.
-                                Nu ekar tystnaden mellan ruinerna, och platsen bär på historiens mysterier och glömda hemligheter.
-                                """)
+                                slowtype(f"""Den övergivna staden är en ruin från en svunnen civilisation. \n
+Krossade byggnader, trasiga gator och murar som rasat under tidens gång ger staden ett spöklikt utseende.\n
+Staden byggdes en gång som ett centrum för handel och magi, men drabbades av okända katastrofer och övergavs.\n
+Nu ekar tystnaden mellan ruinerna, och platsen bär på historiens mysterier och glömda hemligheter.
+""", 0.05)
                             elif natur_val == 4:
                                 break
                             else:
@@ -802,14 +884,67 @@ def biblloktekt():
                         except:
                             print("Skriv om och skriv rätt")
                     
-                    elif bok_val == 3:
-                        print("Godag Godag")
-                        continue
+            elif bok_val == 3:
+                    if playerclass.hybris == True:                         #chekar om playern har hybris
+                        slowtype("The old man is not here anymore, wonder why...", 0.1)
+                    else:
+                            slowtype("Hello there young man", 0.15) 
+                            slowtype("I'am the wise man of the village", 0.1)
+                            gusval = input("Do you want to hear about my life? Ja / Nej")
+                            gusval = gusval.upper()
+                            if gusval == "NEJ":
+                                slowtype("All these young men", 0.1)
+                                time.sleep(0.5)
+                                slowtype("How many have walked past me",0.1)
+                                time.sleep(0.5)
+                                slowtype("To never return ",0.1)
+                                time.sleep(0.5)
+                                slowtype("I have seen them all but not even Leonard Euler could have counted them ",0.1)
+                                time.sleep(0.5)
+                                slowtype("Goodbye", 0.1)
+                                playerclass.hybris = True     #Sätter playern som hybris
+                                
+                            else:
+                                slowtype("In my youth i was a adeventurer", 0.15)
+                                time.sleep(0.5)
+                                slowtype("I walked through caves that were so dark", 0.15)
+                                time.sleep(0.5)
+                                slowtype("Even god didn't know what lived down there", 0.15)
+                                time.sleep(0.5)
+                                slowtype("I walked in forests with tress so tall", 0.15)
+                                time.sleep(0.5)
+                                slowtype("Even the birds didnt know were they ended", 0.15)
+                                time.sleep(0.5)
+                                slowtype("And i walked through cities that were soo haunted", 0.15)
+                                time.sleep(0.5)
+                                slowtype("Even the devil had stoped counting the lost souls", 0.15)
+                                time.sleep(0.5)
+                                slowtype("After all my experinces abroad i returned home with fainted heart", 0.15)
+                                time.sleep(0.5)
+                                slowtype("I settled down and became the old man you see before you", 0.15)
+                                time.sleep(2)
+                                slowtype("But now on the sunset of my life", 0.12)
+                                time.sleep(0.5)
+                                slowtype("I wished i walked out there one more time", 0.1)
+                                time.sleep(2)
+                                slowtype("Becuase there is still something out there", 0.1)
+                                time.sleep(0.5)
+                                slowtype("A creature i only felt the aura from", 0.1)
+                                time.sleep(0.5)
+                                slowtype("Only when that king of darkness is erased can the world's darkness disappaear", 0.1)
+                                time.sleep(0.5)
+                                slowtype("Now son, i wish that you get out there deafeat him",0.1)
+                                time.sleep(2)
+                                slowtype("Only then can i die happy", 0.1)
+                    break
+                        
                     
-                    elif bok_val == 4: 
+            elif bok_val == 4: 
                         break
-                except:
-                    print("Skriv om och skriv rätt")
+            else:
+                        slowtype("Skriv ett av de 4 nummer", 0.2)
+    return playerclass.hybris       #Skickar tillbaka om playern har hybris eller inte
+
 
         
             
@@ -821,7 +956,7 @@ def main(alive):
         print(f"""          Sweelept
         1. Äventyr       2. Markanden       3. Bibloteket
     
-                    4. Stats allocation
+                    4. Stats allocation  5. Casino
             """)
         time.sleep(1)
         Platsval = input("Vad vill du välja? ")
@@ -829,32 +964,36 @@ def main(alive):
             print("Du har valt att äventyra!")
             time.sleep(1)
             print("Du traskar ut ur staden och snart uppenbarare sig en skog där vägen försvinner till tre stigar")
-            time.sleep(2)
+            time.sleep(1)
 
             plats = korsningen()
             if plats == "ja":
                 adventuring = False
                 break      # Slutar while loopen
-            if plats == "1":
+            elif plats == 1:
                 alive = grottvägen(alive)
-            elif plats == "2":
+            elif plats == 2:
                 alive =skogsvägen(alive)
-            elif plats == "3":
+            elif plats == 3:
                 alive = abanondedcity(alive)
+            else:
+                 print("error i main")
             if alive == False:
-                break
+                print("fnaj")
 
         elif Platsval == "2":
             print("Du har valt att gå till markanden")
             Markanden()
         elif Platsval == "3":
             print("Du har valt att gå till biblloktekt")
-            biblloktekt()
-
+            playerclass.hybris = biblloktekt()   #Sparar om playern har hybris eller inte
+            
 
         elif Platsval == "4":
             print("hej")
             # Stats allocation och stat check
+        elif Platsval == "5":
+            casion()
         else:
             pass
 
