@@ -740,7 +740,7 @@ def abanondedcity(alive):
     if vägdecision() ==1:
         print("Du bestämmer dig för att vända tillbaks.")
         return
-    print("Efter fighten så fortsätter gå runt i skyskrapan tills du hittar ett par trappor.")
+    print("Efter fighten så fortsätter du att gå runt i skyskrapan tills du hittar ett par trappor.")
     time.sleep(3)
     while True:
         try:
@@ -797,15 +797,58 @@ def abanondedcity(alive):
                     except:
                         print("Du gav inte ett giltigt svar, svara om.")
                             
-                print("Efteråt återvände du tillbaks till stadens gator ")
+                print("Efteråt återvände du tillbaks till stadens gator.")
                 break
                         
             else:
                 print("Du gav inte ett giltigt svar, svara om.")
         except:
             print("Du gav inte ett giltigt svar, svara om.")
-
-
+time.sleep(2)
+print("Efter ett långt äventyr så blev du klar med att undersöka skyskrapan och du kan äntligen gå hem.")
+time.sleep(3)
+print("I det trista väderet går du över de sprukna gatorna.")
+time.sleep(2)
+print("Det är knäpptyst i staden förutom vindens sus.")
+time.sleep(2)
+print("Men i tystnaden så hörs ett skräckinjagande vrål.")
+time.sleep(2)
+while True:
+    try:
+        museumfortsättaellerundersöka = int(input("""Vill du undersöka vrålet eller vill du fortsätta ut ur staden?
+        1. Undersöka     2. Fortsätta"""))
+        if museumfortsättaellerundersöka == 1:
+            time.sleep(1)
+            print("Du bestämmer dig för att undersöka vrålet och ändrar din gåriktning.")
+            time.sleep(2)
+            print("Vrålet forsätter och blir högre och högre för varje steg du tar.")
+            time.sleep(2)
+            print("Du börjar närma dig vrålets källa och kan snart se var detta skrämmande ljud kommer ifrån.")
+            time.sleep(3)
+            print("Framför dig syns en otroligt stor och urgammal byggnad, det verkar vara ett sorts museum.")
+            time.sleep(2)
+            if vägdecision() ==1:
+                print("Du bestämmer dig för att vända tillbaks.")
+                return
+            time.sleep(2)
+            print("Vrålet har ännu än inte slutat och du bestämmer dig för att går in och äntligen få reda på vad som skapar oljudet")
+            time.sleep(3)
+            print("Du öppnar lätt dörren och tar en liten titt in i museets entré.")
+            time.sleep(2)
+            print("Det chockande rent eftersom att det troligen inte varit någon här på flera decennier.")
+            time.sleep(3)
+            print("Du går in genom dörren och sekunden som porten stängs bakom dig så slutar plötsligt vrålandet och det blir helt knäpptyst.")
+            time.sleep(3)
+            print("Du går ")
+            break
+        elif museumfortsättaellerundersöka ==2:
+            time.sleep(1)
+            print("Du bestämmer dig för att strunta i vrålet och fortsätter istället åt samma håll som du först tänkte gå.")
+            break
+        else:
+            print("Du gav inte ett giltigt svar, svara om.")
+    except:
+        print("Du gav inte ett giltigt svar, svara om.")
 def biblloktekt():
     while True:
             bok_val = int(input("""        Var vill du gå?
