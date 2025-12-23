@@ -13,7 +13,7 @@ class Characterclass():
         self.critrate = critrate
         self.weapon = None
         self.alive = True
-        self.hybris
+        self.hybris= False
 
         self.inventory = []
 

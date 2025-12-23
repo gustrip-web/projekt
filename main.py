@@ -310,24 +310,164 @@ def slots():
             break
     return
 
+
+def carddraw(kortlek, num):
+    lef = len(num)      # Antal borttagna kort
+    ko = rand.randint(0,51-lef)    #Drar bort antal tagna kort från range av index som slumpas fram
+    kort = kortlek[ko]            # Drar ett kort vid ett visst index
+    kortlek.pop(ko)              #Tar bort det indexet så kortet inte kan dras igen
+    slowtype(f"The card {kort} was pulled", 0.1)       # marker vilket kort som dragits
+    if kort == 11:             # Gör om korten till rätta värderna 
+        kort = 10
+    elif kort == 12:
+        kort = 10
+    elif kort == 13:
+        kort = 10
+    elif kort == 14:      # Gör 14 till A eftersom A har en speciel funktion i blackjack
+        kort = "A"
+    num.append(1)       #Lägger till att ett kort dragits
+    return kort 
+playerclass.amoney(5)
+def blackjack():
+    kortlek = list(range(2,15))*4          #flyttade in de i de funktion?   Generar en kortelek med 4st av varje kort
+    num = []                             #Lagar hur många kort som tagits
+    slowtype("Blackjack is one of the most famous card games in the world.",0.05)
+    slowtype("You wanna hear about the Rules? Yes or No" , 0.05)
+    RUles = input()
+    RUles = RUles.upper()
+    if RUles == "YES":
+        slowtype("In blackjack you play against the dealer. The goal is to have a higher score thean dealer but not exeding 21", 0.05)
+        slowtype("Knighs, Queens and kings all have the value of 10, while ace can take the value of both 11 and 1", 0.05)
+        slowtype("You start by getting two cards, the dealr gets one visble card", 0.05)
+        slowtype("Then you can decide to either Hit (grab another card) or stand (be pleased with your cards) then its the dealar turn to try to match your score", 0.05)
+        slowtype("IF the score is equal you get back your own money", 0.1)
+    slowtype("If you win, you get 2x the money back", 0.02)
+    while True:      # Loop som låter användaren köra flera gånger utan att omvägar
+        (slowtype(f"How much you wanna bet? Type 0 to leave. Rn you got {playerclass.money} ", 0.05))
+        bet= input()  # Regesterar bet
+        try:
+            bet = int(bet)           # Sorterar ut tal som inte är intergers
+        except:
+            continue
+        if bet == 0:
+            break
+        elif  bet <= playerclass.money: #Kontrollerar att playern har råd
+            slowtype("Start of round", 0.1)  # Markerar
+            spelarsumma = 0                  #Skapar vairbael
+            spelar1 = carddraw(kortlek, num)   
+            spelar2 = carddraw(kortlek, num) #Ger cardraw arguemenet kortlek och num som sparas från förra carddraw
+            spelar2str = str(spelar2)       # Skaar str veriosner i syfte att lägga in det i en lista
+            spelar1str = str(spelar1)
+            dealer1 = carddraw(kortlek,num)
+            spelarlista = [spelar1str] + [spelar2str]   # Skapar lista
+            if spelar1 == "A":     # Gör om värdet på på "A" till 11 i syfte att ge det till värde summa
+                spelar1 = 11
+            if spelar2 == "A":
+                spelar2 = 11
+            spelarsumma += spelar1    
+            spelarsumma += spelar2       #Adderar start korten till värde summan
+            dealarlista = [dealer1]    
+            dealersumma = 0 
+            avgjort = False     # Bool variabel som användes för näst komman while lopp
+            s = 1       # Variabeler som används i näst kommande for loopar och som sedan växer i looper för att funka som index till listor
+            n=2
+            if spelarsumma > 21:             # Nedan gör att om player får 2st A så kommer den ena göras om till värde 1 englit regler
+                        if "A" in spelarlista:
+                            spelarsumma -= 10 
+                            i = spelarlista.index("A")
+                            spelarlista[i] = "1"
+            
+            while spelarsumma<= 21 and dealersumma < 22 and avgjort == False:   # Nedans körs om ingen värde  är över 21 och det inte är avgjort ( sist i stand elif)
+                slowtype(f"Du har korten {spelarlista[:n]} summa: {spelarsumma}  Dealarn har {dealarlista[:s]}", 0.05)   # ger infomration om utgångsläget
+                slowtype("You wanna hit or stand? H/ S", 0.05)
+                ba1 = input()    #Val
+                ba1.upper()          # Felhantering
+                if ba1 == "H":
+                    spelar3 = carddraw(kortlek,num)
+                    va = str(spelar3)
+                    spelarlista.append(va)
+                    spelarlistanum = spelarlista
+                    if "A" in spelarlistanum:
+                        for i in range(len(spelarlistanum)):    #Kollar varje elemt i listan
+                            if spelarlistanum[i] == "A":        # Om elementet på sen specfik plats är lika med A så byts den till värdet 11
+                                spelarlistanum[i] = "11"
+                    spelarsumma  += int(spelarlistanum[n])
+                    if spelarsumma > 21:
+                        
+                        if "11" in spelarlista:
+                            spelarsumma -= 10 
+                            i = spelarlista.index("11")
+                            spelarlista[i] = "1"
+                        
+                    n+=1
+                
+                elif ba1 == "S":
+                    if dealer1 == "A":
+                        dealer1 = 11
+                    dealersumma += dealer1
+                    while dealersumma <= 21 and dealersumma < spelarsumma:
+                        slowtype(f"Du har {spelarlista[:n]} summa: {spelarsumma}. Delarn har {dealarlista[:s]} summa: {dealersumma}", 0.07)
+                        slowtype("Dealern pulls", 0.1)
+                        dealarnew = carddraw(kortlek,num)
+                        vas = str(dealarnew)
+                        dealarlista.append(vas)
+                        dealernum = dealarlista
+                        if "A" in dealernum:
+                                for i in range(len(dealernum)):    #Kollar varje elemt i listan
+                                    if dealernum[i] == "A":        # Om elementet på sen specfik plats är lika med A så byts den till värdet 11
+                                        dealernum[i] = "11"
+                        dealersumma  += int(dealernum[s])
+                        s += 1
+                        if dealersumma > 21:
+                            if "11" in dealarlista:
+                                dealersumma -= 10 
+                                s = dealarlista.index("11")
+                                dealarlista[i] = "1"
+                        time.sleep(2)
+                    avgjort = True
+
+                    
+                else:
+                    print("Say H or S")
+            slowtype(f"Dealern fick {dealersumma}",0.05)
+            slowtype(f"Du fick {spelarsumma}",0.05)
+            if spelarsumma > 21:
+                print("Du förlora")
+                playerclass.amoney(-bet)
+            elif spelarsumma == dealersumma:
+                print("Det är lika")
+            elif dealersumma>21:
+                print("you won")
+                playerclass.amoney(bet)
+            elif spelarsumma > dealersumma:
+                print("Du vann")
+                playerclass.amoney(bet)
+            elif dealersumma > spelarsumma:
+                print("Du förlorade")
+                playerclass.amoney(-bet)
+                
+        else:
+            slowtype("You dont have enough money",0.05)
+    return
+
 def casion():
-    slowtype("Välkomen till casionot", 0.1)
+    slowtype("Välkomen till casionot", 0.05)
     while True:
         slowtype(f""" Vad vill du göra?     Du har {playerclass.money} guld \n
               1. Slots   2. Spela Black Jack    3. Baren   \n
-              4. Poker            5. Quiz                6. Gå tillbaka""", 0.1)
+              4. Poker            5. Quiz                6. Gå tillbaka""", 0.02)
         casval = input("Vad vill du göra?")
         if casval == "1":
-            slowtype("Du har valt att spela slots", 0.1)
+            slowtype("Du har valt att spela slots", 0.05)
             slots()
         elif casval == "2":
-            slowtype("Du har valt att spela Black Jack", 0.1)
+            blackjack()
         elif casval == "3":
-            slowtype("Du har valt att gå till baren", 0.1)
+            slowtype("Du har valt att gå till baren", 0.05)
         elif casval == "4":
-            slowtype("Du har valt att spela Poker", 0.1)
+            slowtype("Du har valt att spela Poker", 0.05)
         elif casval == "5":
-            slowtype("Du har valt att spela Quiz", 0.1)
+            slowtype("Du har valt att spela Quiz", 0.05)
         elif casval == "6":
             break
 
@@ -804,51 +944,51 @@ def abanondedcity(alive):
                 print("Du gav inte ett giltigt svar, svara om.")
         except:
             print("Du gav inte ett giltigt svar, svara om.")
-time.sleep(2)
-print("Efter ett långt äventyr så blev du klar med att undersöka skyskrapan och du kan äntligen gå hem.")
-time.sleep(3)
-print("I det trista väderet går du över de sprukna gatorna.")
-time.sleep(2)
-print("Det är knäpptyst i staden förutom vindens sus.")
-time.sleep(2)
-print("Men i tystnaden så hörs ett skräckinjagande vrål.")
-time.sleep(2)
-while True:
-    try:
-        museumfortsättaellerundersöka = int(input("""Vill du undersöka vrålet eller vill du fortsätta ut ur staden?
-        1. Undersöka     2. Fortsätta"""))
-        if museumfortsättaellerundersöka == 1:
-            time.sleep(1)
-            print("Du bestämmer dig för att undersöka vrålet och ändrar din gåriktning.")
-            time.sleep(2)
-            print("Vrålet forsätter och blir högre och högre för varje steg du tar.")
-            time.sleep(2)
-            print("Du börjar närma dig vrålets källa och kan snart se var detta skrämmande ljud kommer ifrån.")
-            time.sleep(3)
-            print("Framför dig syns en otroligt stor och urgammal byggnad, det verkar vara ett sorts museum.")
-            time.sleep(2)
-            if vägdecision() ==1:
-                print("Du bestämmer dig för att vända tillbaks.")
-                return
-            time.sleep(2)
-            print("Vrålet har ännu än inte slutat och du bestämmer dig för att går in och äntligen få reda på vad som skapar oljudet")
-            time.sleep(3)
-            print("Du öppnar lätt dörren och tar en liten titt in i museets entré.")
-            time.sleep(2)
-            print("Det chockande rent eftersom att det troligen inte varit någon här på flera decennier.")
-            time.sleep(3)
-            print("Du går in genom dörren och sekunden som porten stängs bakom dig så slutar plötsligt vrålandet och det blir helt knäpptyst.")
-            time.sleep(3)
-            print("Du går ")
-            break
-        elif museumfortsättaellerundersöka ==2:
-            time.sleep(1)
-            print("Du bestämmer dig för att strunta i vrålet och fortsätter istället åt samma håll som du först tänkte gå.")
-            break
-        else:
+    time.sleep(2)
+    print("Efter ett långt äventyr så blev du klar med att undersöka skyskrapan och du kan äntligen gå hem.")
+    time.sleep(3)
+    print("I det trista väderet går du över de sprukna gatorna.")
+    time.sleep(2)
+    print("Det är knäpptyst i staden förutom vindens sus.")
+    time.sleep(2)
+    print("Men i tystnaden så hörs ett skräckinjagande vrål.")
+    time.sleep(2)
+    while True:
+        try:
+            museumfortsättaellerundersöka = int(input("""Vill du undersöka vrålet eller vill du fortsätta ut ur staden?
+            1. Undersöka     2. Fortsätta"""))
+            if museumfortsättaellerundersöka == 1:
+                time.sleep(1)
+                print("Du bestämmer dig för att undersöka vrålet och ändrar din gåriktning.")
+                time.sleep(2)
+                print("Vrålet forsätter och blir högre och högre för varje steg du tar.")
+                time.sleep(2)
+                print("Du börjar närma dig vrålets källa och kan snart se var detta skrämmande ljud kommer ifrån.")
+                time.sleep(3)
+                print("Framför dig syns en otroligt stor och urgammal byggnad, det verkar vara ett sorts museum.")
+                time.sleep(2)
+                if vägdecision() ==1:
+                    print("Du bestämmer dig för att vända tillbaks.")
+                    return
+                time.sleep(2)
+                print("Vrålet har ännu än inte slutat och du bestämmer dig för att går in och äntligen få reda på vad som skapar oljudet")
+                time.sleep(3)
+                print("Du öppnar lätt dörren och tar en liten titt in i museets entré.")
+                time.sleep(2)
+                print("Det chockande rent eftersom att det troligen inte varit någon här på flera decennier.")
+                time.sleep(3)
+                print("Du går in genom dörren och sekunden som porten stängs bakom dig så slutar plötsligt vrålandet och det blir helt knäpptyst.")
+                time.sleep(3)
+                print("Du går ")
+                break
+            elif museumfortsättaellerundersöka ==2:
+                time.sleep(1)
+                print("Du bestämmer dig för att strunta i vrålet och fortsätter istället åt samma håll som du först tänkte gå.")
+                break
+            else:
+                print("Du gav inte ett giltigt svar, svara om.")
+        except:
             print("Du gav inte ett giltigt svar, svara om.")
-    except:
-        print("Du gav inte ett giltigt svar, svara om.")
 def biblloktekt():
     while True:
             bok_val = int(input("""        Var vill du gå?
