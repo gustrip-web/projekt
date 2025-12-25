@@ -989,6 +989,7 @@ def abanondedcity(alive):
                 print("Du gav inte ett giltigt svar, svara om.")
         except:
             print("Du gav inte ett giltigt svar, svara om.")
+
 def biblloktekt():
     while True:
             bok_val = int(input("""        Var vill du gå?
