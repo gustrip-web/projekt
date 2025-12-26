@@ -14,6 +14,7 @@ class Characterclass():
         self.weapon = None
         self.alive = True
         self.hybris= False
+        self.alcholic = 0
 
         self.inventory = []
 
