@@ -45,6 +45,7 @@ monster_list3 = [Monster("Jätte", 400, 35, 1),
 
 sandworm = Monster("Sandworm", 124, 24, 1)
 
+SkelettRaptor = Monster("Skelett Raptor", 100, 30, 1)
 # Gameplay
 print("""
          Welcome to the Sweelept!""")
@@ -166,7 +167,6 @@ def vägdecision():  # Väg val på de olika vägarna
     return vägsvar
 
 def Markanden():
-    playerclass.amoney(20)
     print("vällkomen till markanden")
     while True:
         time.sleep(2)
@@ -328,7 +328,8 @@ def carddraw(kortlek, num):
         kort = "A"
     num.append(1)       #Lägger till att ett kort dragits
     return kort 
-playerclass.amoney(5)
+playerclass.amoney(20)
+
 def blackjack():
     kortlek = list(range(2,15))*4          #flyttade in de i de funktion?   Generar en kortelek med 4st av varje kort
     num = []                             #Lagar hur många kort som tagits
@@ -452,108 +453,181 @@ def blackjack():
     return
 
 def baren():
-    print("You decide your worth taking some drinks in the bar")
-
-    slowtype("The bar is sleak and modern, featuring a long marble desk", 0.06)
-    slowtype("At the moment it's pretty calm but you can see broken chiar in a corner... \n probably the rest of a earlier bar fight",0.05)
-    slowtype("You look for the bartender but is nowwhere to be seen",0.1)
+    slowtype("You feel your worth taking a couple of drinks at the bar",0.1)
+    slowtype("The bar is sleek and modern, featuring a long marble desk", 0.06)
+    slowtype("At the moment it's pretty calm but you can see broken chair in a corner... \n probably the rest of a earlier bar fight",0.05)
+    slowtype("You look for the bartender but he is nowwhere to be seen",0.1)
     slowtype("At the stools there is only two people filling the more than 20 seats", 0.07)
     slowtype("The first person is male who looks forty and has put his forhead agianst the counter, perhaps resting his neck while he continuously scrols through reels", 0.05)
-    slowtype("Do you want to talk to the man or the women   1: Man 2. Sit alone 3. Leave the bar")
-    barsvar = input()
-    if barsvar == 1:
-        slowtype("You approch the scrolling man", 0.1)
-        slowtype("Mind me takeing a seat? you saying while trying to look laidback")
-        slowtype("No at all. He responds without looking up from his phone")
-        slowtype("What are you watching, looks imporant to you", .1)
-        slowtype("It isnt, that's why it works" .1)
-        slowtype("He puts his phone down and yells for the bartender" .1)
-        slowtype("What can i get you? A voice answers"0.1)
-        slowtype("Give me two dry martini"0.1)
-        slowtype("You look aorund but dont see the bartender, only thingh you see is some women who is sitting a on the other side of the room", .1)
-        slowtype("where is he? you ask the man",.1)
-        slowtype("It's all automated now. The old bartender got his left eye blind after some asshole threw glass bottle at him"0.1)
-        slowtype("He was nice guy. The casion decided to replace him with some robot, they said it was to dangerous to work here",0.1)
-        slowtype("That good right? You reply"0.1)
-        slowtype("Maybe.. I think the company was happy to swap him out as he was popular and they had go give him a good salary"0.1)
-        slowtype("I even think they hired the guy who threw the bottle",0.1)
-        slowtype("Oh yeay these casions are allway greedy"0.1)
-        slowtype("Suddenly two glasses are elevated up from the desk, filled with liquour"0.1)
-        slowtype("You like Dry Martini? you ask")
-        slowtype("Not really, ever since my wife left me they havent tasted as good. I just drink it for the...",0.1)
-        time.sleep(5)
-        slowtype("Why do you drink it?",.1)
-        slowtype("The man down his drink and then stands up",0.1)
-        slowtype("I think i gotta go to the toilet",0.1)
-        slowtype("He walks away heading towards the toilet",0.1)
-        slowtype("After a minute or two you year a loud bang", 0.1)
-        slowtype("You jump up", 0.1)
-        slowtype("What the hell, what the hell was thhat!", 0.1)
-        slowtype("Calm down littele boy"0.1)
-        slowtype("You turn around and see the women you saw earlier looking at you",0.1)
-        slowtype("She is around thrity with brown hair",0.1)
-        slowtype("This happen all the time here stopp screaming"0.1)
-        slowtype("What happen all the time?", 0.1)
-        slowtype("People killing thmeself, especally guys like him, alcholic men, puh!", 0.1)
-        slowtype("They have nothing to do anymore, just relics like the dinousaurs, if i were in there boots i would also do it",.1)
-        slowtype("Take seat with meeee, young man and we can talk", 0.1)
-        slowtype("Do you want to talk to the women or leave the bar 1. Talk 2. LEave", 0.1)
-        barval2 = input()
-        if barval == "1": 
-            slowtype("You walk forward and sits down beside her", 0.1)
-            slowtype("She looks at you, want a drink? yes or no", 0.1)
-            barval3 = input()
-            barval3 = barval3.upper()
-            if barval == "YES":
-                slowtype("She calls for a drink",0.1)
+    while True:
+        slowtype("Do you want to talk to the man or the women   1: Man 2. Sit alone 3. Leave the bar",0.07)
+        barsvar = input()
+        if barsvar == "1":
+            slowtype("You approch the scrolling man", 0.1)
+            slowtype("Mind me takeing a seat? you saying while trying to look laidback",0.07)
+            slowtype("No at all. He responds without looking up from his phone",0.07)
+            slowtype("What are you watching, looks imporant to you", .1)
+            slowtype("It isnt, that's why it works", .1)
+            slowtype("He puts his phone down and yells for the bartender", .1)
+            slowtype("What can i get you? A voice answers",0.1)
+            slowtype("Give me two dry martini",0.1)
+            slowtype("You look aorund but dont see the bartender, only thingh you see is some women who is sitting a on the other side of the room", .1)
+            slowtype("where is he? you ask the man",.1)
+            slowtype("It's all automated now. The old bartender got his left eye blind after some asshole threw glass bottle at him",0.1)
+            slowtype("He was nice guy. The casion decided to replace him with some robot, they said it was to dangerous to work here",0.1)
+            slowtype("That good right? You reply",0.1)
+            slowtype("Maybe.. I think the company was happy to swap him out as he was popular and they had go give him a good salary",0.1)
+            slowtype("I even think they hired the guy who threw the bottle",0.1)
+            slowtype("Oh... yeay these casions are allway greedy",0.1)
+            slowtype("Suddenly two glasses are elevated up from the desk, filled with liquour",0.1)
+            slowtype("You like Dry Martini? you ask",0.1)
+            slowtype("Not really, ever since my wife left me they havent tasted as good. I just drink it for the...",0.1)
+            time.sleep(5)
+            slowtype("Why do you drink it?",.1)
+            slowtype("The man downs his drink and then stands up",0.1)
+            slowtype("I think i gotta go to the toilet",0.1)
+            slowtype("He walks away heading towards the toilet",0.1)
+            slowtype("After a minute or two you hear a loud bang", 0.1)
+            time.sleep(0.5)
+            slowtype("You jump up", 0.1)
+            slowtype("What the hell, what the hell was thhat!", 0.1)
+            time.sleep(2)
+            slowtype("Calm down littele boy",0.1)
+            slowtype("You turn around and see the women you saw earlier looking at you",0.1)
+            slowtype("She is around thrity with brown hair",0.1)
+            slowtype("This happen all the time here stopp screaming",0.1)
+            slowtype("What happen all the time?", 0.1)
+            slowtype("People killing thmeself, especally guys like him, alcholic men, puh!", 0.1)
+            slowtype("They have nothing to do anymore, just relics like the dinousaurs, if i were in there boots i would also do it",.1)
+            slowtype("Take seat with meeee, young man and we can talk", 0.1)
+            slowtype("Do you want to talk to the women or leave the bar      1. Talk     2. Leave", 0.1)
+            barval2 = input()
+            if barval2 == "1":  
+                slowtype("You walk forward and sits down beside her", 0.1)
+                slowtype("She looks at you, want a drink? yes or no", 0.1)
+                barval3 = input()
+                barval3 = barval3.upper()
+                if barval3 == "YES":
+                    slowtype("She calls for a drink",0.1)
+                    slowtype("What do you work with? you ask",0.1)
+                    slowtype("Well im a hooker, she replies",0.1)
+                    slowtype("A hooker why would you want to be hooker ",0.1)
+                    slowtype("I dont want to but i made some stupid choices over the year and this is where i ended up",0.1)
+                    slowtype("Im sorry to hear that, have you tried switching carrer? If i can call it a carrer", 0.1)
+                    slowtype("Haha, but yes i tired but i dont really have the facilites needed",0.1)
+                    slowtype("Two drinks now appear from the table as before",0.1)
+                    slowtype("You cast a galnce towards the bathroom no sign that he is coming out ",0.1)
+                    slowtype("You look back at your drinks and take a big sip to cool the anxiety",0.1)
+                    slowtype("How does it taste, she asks you",0.1)
+                    slowtype("Good i suppose maybe a tad strange like someone had dropped a pill in",0.1)
+                    slowtype("You start feeling a bit sleepy suddenly and then evreything goes black",0.1)
+                    time.sleep(5)
+                    slowtype("You wake upp on hard floor, you notice a strange smell that is unfamiliar",0.1)
+                    slowtype("You manage to open your eyes when you realise that your in a bathroom",0.1)
+                    slowtype("Still dizzy your manage to stand up, you go troguht through your belongings",0.1)
+                    slowtype("Weapons check, items check, wallet? That filthy whore took my walllet!",0.1)
+                    playerclass.amoney = 0
+                    slowtype("You burst trought the toilet door in pure rage",0.1)
+                    slowtype("Outside lays the bar guy all messed up",0.1)
+                    slowtype("This cant be for real, as you jump over his corpse to get to the door",0.1)
+                    slowtype("This is the last place i visit this bar",0.1)
+            else: 
                 slowtype("What do you work with? you ask",0.1)
                 slowtype("Well im a hooker, she replies",0.1)
                 slowtype("A hooker why would you want to be hooker ",0.1)
                 slowtype("I dont want to but i made some stupid choices over the year and this is where i ended up",0.1)
                 slowtype("Im sorry to hear that, have you tried switching carrer? If i can call it a carrer", 0.1)
                 slowtype("Haha, but yes i tired but i dont really have the facilites needed",0.1)
-                slowtype("Two drinks now appear from the table as before",0.1)
-                slowtype("You cast a galnce towards the bathroom no sign that he is coming out ",0.1)
-                slowtype("You look back at your drinks and take a big sip to cool the anxiety",0.1)
-                slowtype("How does it taste, she asks you",0.1)
-                slowtype("Good i suppose maybe a tad strange like someone had dropped a pill in",0.1)
-                slowtype("You start feeling a bit sleep suddenly and then evreything goes black",0.1)
+                slowtype("Anyway i have to go now, got a client, Goodbye",0.1)
+                slowtype("Do you want to stay in the bar or leave?     Yes or no")
+                barsvar4 = input()
+                barsvar4 = barsvar4.upper()
+                if barsvar4 == "YES":
+                    slowtype("Infront of you there is a instruction",.1)
+                    slowtype("Just call for a drink if you need one!",0.1)
+                    for ias in range(1,6):
+                        if ias == 4:
+                            slowtype("Thingh are looking all blurry now",0.1)
+                        if ias == 5:
+                            slowtype("Thingh are looking all fruity now",0.1)
+                        slowtype("Want to order a drink?  it cost 2 gold.   Yes or no",0.07)
+                        dricksvar = input()
+                        
+                        dricksvar = dricksvar.upper()
+                        if dricksvar == "YES":
+                            slowtype("-Give me Dry Martini!",0.1)
+                            playerclass.amoney(-2)
+                            slowtype("-Okay, one dry Martini, answers a robo voice",0.05)
+                            time.sleep(2)
+                            slowtype("One dry martini appears from inside the desk",0.1)
+                            slowtype("You drink it",0.1)
+                            
+                        else:
+                            slowtype("You know how to keep it moderate, and decide that's enough for now",0.1)
+                            time.sleep(1)
+                            break
+                            return
+                    slowtype("Everything goes black",0.2)                        #Blackout
+                    time.sleep(5)
+                    slowtype("You wake upp on hard floor, you notice a strange smell that is unfamiliar",0.1)
+                    slowtype("You manage to open your eyes when you realise that your in a bathroom",0.1)
+                    slowtype("Still dizzy your manage to stand up, you go troguht through your belongings",0.1)
+                    slowtype("Weapons check, items check, wallet? Someone took my walllet!",0.1)
+                    playerclass.amoney = 0
+                    slowtype("You burst trought the toilet door in pure rage",0.1)
+                    slowtype("Outside lays the guy who sat in the bar before, he is all messed up",0.1)
+                    slowtype("This cant be for real.. you think, as you jump over his corpse to get to the door",0.1)
+                    slowtype("This is the last place i visit this bar",0.1)
+                
+                break
+        if barsvar == "2":
+                slowtype("You take a free seat at the counter",0.1)
+                slowtype("Infront of you there is a instruction",.1)
+                slowtype("Just call for a drink if you need one!",0.1)
+                for ias in range(1,6):
+                    if ias == 4:
+                        slowtype("Thingh are looking all blurry now",0.1)
+                    if ias == 5:
+                        slowtype("Thingh are looking all fruity now",0.1)
+                    slowtype("Want to order a drink?  it cost 2 gold.   Yes or no",0.07)
+                    dricksvar = input()
+                    
+                    dricksvar = dricksvar.upper()
+                    if dricksvar == "YES":
+                        slowtype("-Give me Dry Martini!",0.1)
+                        playerclass.amoney(-2)
+                        slowtype("-Okay, one dry Martini, answers a robo voice",0.05)
+                        time.sleep(2)
+                        slowtype("One dry martini appears from inside the desk",0.1)
+                        slowtype("You drink it",0.1)
+                        
+                    else:
+                        slowtype("You know how to keep it moderate, and decide that's enough for now",0.1)
+                        time.sleep(1)
+                        break
+                        return
+                slowtype("Everything goes black",0.2)                        #Blackout
                 time.sleep(5)
-                slowtype("You wake upp on hard floor, a strange smell that is unfamiilar",0.1)
+                slowtype("You wake upp on hard floor, you notice a strange smell that is unfamiliar",0.1)
                 slowtype("You manage to open your eyes when you realise that your in a bathroom",0.1)
                 slowtype("Still dizzy your manage to stand up, you go troguht through your belongings",0.1)
-                slowtype("Weapons check, items check, wallet? That filthy whore took my walllet!",0.1)
+                slowtype("Weapons check, items check, wallet? Someone took my walllet!",0.1)
                 playerclass.amoney = 0
                 slowtype("You burst trought the toilet door in pure rage",0.1)
-                slowtype("Outside lays the bar guy all messed up",0.1)
-                slowtype("This cant be for real, as you jump over his corpse to get to the door",0.1)
+                slowtype("Outside lays the guy who sat in the bar before, he is all messed up",0.1)
+                slowtype("This cant be for real.. you think, as you jump over his corpse to get to the door",0.1)
                 slowtype("This is the last place i visit this bar",0.1)
-        if barsvar == 2:
-                slowtype("You take a free seat at the counter",0.1)
-                slowtype("Infront of you there is a insturction",.1)
-                slowtype("Just call for a drink if you need one!",0.1)
-            while self.alcholic < 6:
-                slowtype("Want to order a drink?  it cost 2 gold.   Yes or no")
-                dricksvar = input()
-                dricksvar = dricksvar.upper()
-                if drickersvar == "YES":
-                    slowtype("Give me Dry Martini!",0.1)
-                    slowtype("Okay, one dry Martini, answers a robo voice"0.05)
-                    time.sleep(2)
-                    slowtype("One draimartini appears from inside the desk",0.1)
-                    slowtype("You drink it")
-                    self.alcholic += 1
-                else:
-                    break
-        return
+                break
+        else:
+            break
+    slowtype("You leave the bar",0.1)
+    return
 
 
 
 
 
 
-    At the bar there is neat looking guy with a big smile")
-    print("Are you gonna approach him")
 
 
 
@@ -573,6 +647,7 @@ def casion():
             blackjack()
         elif casval == "3":
             slowtype("Du har valt att gå till baren", 0.05)
+            baren()
         elif casval == "4":
             slowtype("Du har valt att spela Poker", 0.05)
         elif casval == "5":
@@ -870,8 +945,7 @@ def skogsvägen(alive):
     else:
         print("Du går djupare in i skogen.")
         time.sleep(2)
-        print(
-            "Efter ett tag hör du grenarna prassla bakom dig och du vänder dig snabbt om.")
+        print("Efter ett tag hör du grenarna prassla bakom dig och du vänder dig snabbt om.")
         monsterval = monsterpullar()
         alive = battle(monsterval, playerclass, alive)
         if alive == False: 
@@ -922,8 +996,7 @@ def skogsvägen(alive):
         # adventuring = False
         # return
     time.sleep(2)
-
-
+    
     if vägdecision() == 1:
         print("Du bestämmer dig för att vända tillbaks.")
         return
@@ -936,11 +1009,11 @@ def skogsvägen(alive):
         time.sleep(2)
         monsterval = monsterpullar()
         alive = battle(monsterval, playerclass, alive)
-    if alive == False:        # Alive ändras i battle func
-        return playerclass.alive        
-        # global adventuring
-        # adventuring = False
-        # return
+        if alive == False:        # Alive ändras i battle func
+            return playerclass.alive        
+            # global adventuring
+            # adventuring = False
+            # return
         print("Efter ännu en till attack så känner du dig utmattad och fortsätter vandra med hopp om att du snart kommer ut ur denna läskiga skog.")
         time.sleep(4)
         print("Efter ett långt äventyr så ser du ett glimmer från skogens kant och bestämmer dig för att gå denns håll.")
@@ -952,16 +1025,59 @@ def skogsvägen(alive):
             Stuga_val = int(input("""      Vill du:
             1. Gå in i stugan       2. Strunta i stugan och fortsätta vandra"""))
             if Stuga_val == 1:
+                slowtype("Du bestämmer dig för att gå in i stugan i hopp om resurser som kan hjälpa dig komma ut ur skogen.",0.1)
+                slowtype("Du går fram till den lilla stugan och tar en titt in genom fönstret.",0.1)
+                slowtype("Stugans insida ser väl behandlad ut, nästan som att någon bodde här ute i skogen.", 0.1)
+                slowtype("Helt plötsligt hör du ett prassel bakom dig och du vänder dig hastigt om.",0.1)
+                slowtype("Framför dig står en kort gammal dam som kollar på dig med nyfikna ögon.",0.1)
+                slowtype("Men hallå där! Säger Damen.", 0.05)
+                slowtype("H-hej, säger du osäkert tillbaks.",0.05)
+                slowtype("Vad gör en ung äventyrare som dig här ute i denna farliga skog? undrar kvinnan.",0.05)
+                while True:
+                    try:   
+                        damfråga = int(input("""Vad svarar du?
+                        1. Skulle kunna fråga detsamma. 2. Inget för dig att veta! """))
+                        if damfråga == 1:
+                            slowtype("Om du inte redan visste det så bor jag här i min stuga som du just snokade runt. Svarade Damen.",0.05)
+                            slowtype("Jag hoppas du vet att det inte är särskilt trevligt att snoka runt andras hus. Säger hon besviket.",0.05)
+                            break
+                        elif damfråga ==2:
+                            slowtype("Förlåt för att jag frågade, menade inte att kränka dig. Svarade Damen.",0.05)
+                            break
+                        else:
+                            print("Du gav inte ett giltigt svar, svara om.")
+                    except:
+                        print("Du gav inte ett giltigt svar, svara om.")
+                
+                slowtype("Kom in i min stuga, denna skog är inte säker under nätterna, dessutom ser det ut som att du behöver vila lite.")
+                while True:
+                    try:
+                        damfråga2 =int(input("""Vad gör du?
+                        1. Följer med damen in i stugan.   2. Säger nej och fortsätter att vandra i skogen."""))
+                        if damfråga2 == 1:
+                            slowtype("Du följer med damen.",0.1)
+                            slowtype("Stugan är full med olika grejer, massor med olika växter och annat från skogen.",0.1)
+                            slowtype("Varför bor du här ute? Frågar du damen.")
+                            slowtype("")
+                            break
+                        elif damfråga2 ==2:
+                            slowtype("Nej, svarar du och går din väg djupare in i skogen utan att kolla tillbaka.")
+                            break
+                        else:
+                            print("Du gav inte ett giltigt svar, svara om.")
+                    except:
+                        print("Du gav inte ett giltigt svar, svara om.")
                 break
-                print("Du bestämmer dig för att ta dig in i stugan i hopp om resurser som kan hjälpa dig komma ut ur skogen.")
             elif Stuga_val == 2:
-                print()
+                slowtype("Du bestämmer dig för att struna i stugan och fortsätter att vandra genom den täta skogen.",0.1)
                 break
             else:
                 print("Du gav inte ett giltigt svar, svara om.")
         except: 
             print("Du gav inte ett giltigt svar, svara om.")
-
+        slowtype("Vinden blir starkare och starkare och framför dig ses en öppning mellan träden.",0.1)
+        slowtype("Du har äntligen kommit ut ur den täta skogen och du kan nu fortsätta ditt äventyr starkare än någonsin.",0.1)
+        break
 
 def abanondedcity(alive):
     print("Efter ett tag kommer du fram till vad du tror är en helt vanlig stad.")
@@ -1088,16 +1204,30 @@ def abanondedcity(alive):
                 time.sleep(3)
                 print("Du går in genom dörren och sekunden som porten stängs bakom dig så slutar plötsligt vrålandet och det blir helt knäpptyst.")
                 time.sleep(3)
-                print("Du går ")
+                slowtype("Efter lite inspektion visar det sig att museumet verkar vara ett gammalt naturhistorisk museum med massor med utrotade varelser, så som dinosaurier.", 0.1)
+                slowtype("När du går runt och kollar på alla uppvisade dinosaurieskelett så märker du att någonting inre riktigt stämmer.", 0.1)
+                time.sleep(2)
+                slowtype("En av uppvisningsplattformarna är tomma.",0.1)
+                slowtype("Medans då står och klurar på varför den är tom så känner du ett kyligt andetag gå nerför din nacke.",0.1)
+                slowtype("Med hjälp av dina snabba reflexer så hoppar du precis undan en dödlig attack som slår i golvet med ett högt klang.", 0.1)
+                alive = battle(SkelettRaptor, playerclass, alive)
+                if alive == False:
+                    return playerclass.alive
+                slowtype("Grattis du besegrade monstret, som belöning får du 30 guldmynt!",0.1)
+                playerclass.amoney(30)
+                slowtype("Efter den farliga fighten mot Skelett Raptorn bestämmer du dig för att äntligen lämna denna övergivna stad och museum bakom dig och fortsätta med ditt primära äventyr.",0.1)
+                slowtype("Efter ännu en lång tur kommer du till slut fram till där du lämnade för att undersöka vrålet, fast nu är det tyst och fridfullt.",0.1)
                 break
             elif museumfortsättaellerundersöka ==2:
                 time.sleep(1)
-                print("Du bestämmer dig för att strunta i vrålet och fortsätter istället åt samma håll som du först tänkte gå.")
+                slowtype("Du bestämmer dig för att strunta i vrålet och fortsätter istället åt samma håll som du först tänkte gå.",0.1)
                 break
             else:
                 print("Du gav inte ett giltigt svar, svara om.")
         except:
             print("Du gav inte ett giltigt svar, svara om.")
+    slowtype("Efter denna otroligt långa och spännande turen genom staden så kan du äntligen fortsätta frammåt och besegra alla som kommer i din väg.",0.1)
+    return
 
 def biblloktekt():
     while True:
