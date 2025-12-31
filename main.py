@@ -383,7 +383,7 @@ def blackjack():
                 slowtype(f"Du har korten {spelarlista[:n]} summa: {spelarsumma}  Dealarn har {dealarlista[:s]}", 0.05)   # ger infomration om utgångsläget
                 slowtype("You wanna hit or stand? H/ S", 0.05)
                 ba1 = input()    #Val
-                ba1.upper()          # Felhantering
+                ba1 = ba1.upper()          # Felhantering
                 if ba1 == "H":
                     spelar3 = carddraw(kortlek,num)
                     va = str(spelar3)
@@ -459,8 +459,9 @@ def baren():
     slowtype("You look for the bartender but he is nowwhere to be seen",0.1)
     slowtype("At the stools there is only two people filling the more than 20 seats", 0.07)
     slowtype("The first person is male who looks forty and has put his forhead agianst the counter, perhaps resting his neck while he continuously scrols through reels", 0.05)
+    slowtype("And a girl look kinda sus", .07)
     while True:
-        slowtype("Do you want to talk to the man or the women   1: Man 2. Sit alone 3. Leave the bar",0.07)
+        slowtype("What do you want to do?   1: Talk to the man  2. Sit alone  3. Leave the bar",0.07)
         barsvar = input()
         if barsvar == "1":
             slowtype("You approch the scrolling man", 0.1)
@@ -472,7 +473,7 @@ def baren():
             slowtype("What can i get you? A voice answers",0.1)
             slowtype("Give me two dry martini",0.1)
             slowtype("You look aorund but dont see the bartender, only thingh you see is some women who is sitting a on the other side of the room", .1)
-            slowtype("where is he? you ask the man",.1)
+            slowtype("Where is he? you ask the man",.1)
             slowtype("It's all automated now. The old bartender got his left eye blind after some asshole threw glass bottle at him",0.1)
             slowtype("He was nice guy. The casion decided to replace him with some robot, they said it was to dangerous to work here",0.1)
             slowtype("That good right? You reply",0.1)
@@ -512,30 +513,30 @@ def baren():
                     slowtype("What do you work with? you ask",0.1)
                     slowtype("Well im a hooker, she replies",0.1)
                     slowtype("A hooker why would you want to be hooker ",0.1)
-                    slowtype("I dont want to but i made some stupid choices over the year and this is where i ended up",0.1)
-                    slowtype("Im sorry to hear that, have you tried switching carrer? If i can call it a carrer", 0.1)
-                    slowtype("Haha, but yes i tired but i dont really have the facilites needed",0.1)
+                    slowtype("I dont want to but I made some stupid choices over the year and this is where I ended up",0.1)
+                    slowtype("Im sorry to hear that, have you tried switching carrer? If I can call it a carrer", 0.1)
+                    slowtype("Haha, but yes I tired but I dont really have the facilites needed",0.1)
                     slowtype("Two drinks now appear from the table as before",0.1)
                     slowtype("You cast a galnce towards the bathroom no sign that he is coming out ",0.1)
-                    slowtype("You look back at your drinks and take a big sip to cool the anxiety",0.1)
+                    slowtype("You look back at your drinks and take a big sip to cool your anxiety",0.1)
                     slowtype("How does it taste, she asks you",0.1)
-                    slowtype("Good i suppose maybe a tad strange like someone had dropped a pill in",0.1)
-                    slowtype("You start feeling a bit sleepy suddenly and then evreything goes black",0.1)
+                    slowtype("Good I suppose maybe a tad strange like someone had dropped a pill in",0.1)
+                    slowtype("You start feeling a bit sleepy suddenly and then everything goes black",0.1)
                     time.sleep(5)
-                    slowtype("You wake upp on hard floor, you notice a strange smell that is unfamiliar",0.1)
+                    slowtype("You wake upp on hard floor. You notice a strange smell that is unfamiliar",0.1)
                     slowtype("You manage to open your eyes when you realise that your in a bathroom",0.1)
-                    slowtype("Still dizzy your manage to stand up, you go troguht through your belongings",0.1)
+                    slowtype("Still dizzy your manage to stand up, you go through your belongings",0.1)
                     slowtype("Weapons check, items check, wallet? That filthy whore took my walllet!",0.1)
                     playerclass.amoney = 0
                     slowtype("You burst trought the toilet door in pure rage",0.1)
                     slowtype("Outside lays the bar guy all messed up",0.1)
                     slowtype("This cant be for real, as you jump over his corpse to get to the door",0.1)
-                    slowtype("This is the last place i visit this bar",0.1)
+                    slowtype("This is the last time I will visit this bar",0.1)
             else: 
                 slowtype("What do you work with? you ask",0.1)
                 slowtype("Well im a hooker, she replies",0.1)
                 slowtype("A hooker why would you want to be hooker ",0.1)
-                slowtype("I dont want to but i made some stupid choices over the year and this is where i ended up",0.1)
+                slowtype("I dont want to but I made some stupid choices over the year and this is where I ended up",0.1)
                 slowtype("Im sorry to hear that, have you tried switching carrer? If i can call it a carrer", 0.1)
                 slowtype("Haha, but yes i tired but i dont really have the facilites needed",0.1)
                 slowtype("Anyway i have to go now, got a client, Goodbye",0.1)
@@ -547,7 +548,7 @@ def baren():
                     slowtype("Just call for a drink if you need one!",0.1)
                     for ias in range(1,6):
                         if ias == 4:
-                            slowtype("Thingh are looking all blurry now",0.1)
+                            slowtype("Things are looking all blurry now",0.1)
                         if ias == 5:
                             slowtype("Thingh are looking all fruity now",0.1)
                         slowtype("Want to order a drink?  it cost 2 gold.   Yes or no",0.07)
