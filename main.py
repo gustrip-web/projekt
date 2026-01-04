@@ -4,6 +4,7 @@ import random as rand
 from items import *
 from character import *
 import time
+from questions import *
 
 # Characters
 tank = Characterclass("Mr.Tank", 200, 10, 0.1, 2)
@@ -624,37 +625,74 @@ def baren():
     slowtype("You leave the bar",0.1)
     return
 
-
-
-
-
-
-
-
-
-
-
 def casion():
-    slowtype("Välkomen till casionot", 0.05)
+    slowtype("Welcome to the Freedom Casion!", 0.05)
     while True:
-        slowtype(f""" Vad vill du göra?     Du har {playerclass.money} guld \n
-              1. Slots   2. Spela Black Jack    3. Baren   \n
-              4. Poker            5. Quiz                6. Gå tillbaka""", 0.02)
-        casval = input("Vad vill du göra?")
+        slowtype(f""" What do want to play?     You have {playerclass.money} gold \n
+              1. Slots   2.  Black Jack    3. The freedom bar   \n
+                    4. Quiz         5. Leave""", 0.02)
+        casval = input()
         if casval == "1":
-            slowtype("Du har valt att spela slots", 0.05)
+            slowtype("You choose to play slots", 0.05)
             slots()
         elif casval == "2":
             blackjack()
         elif casval == "3":
-            slowtype("Du har valt att gå till baren", 0.05)
             baren()
         elif casval == "4":
-            slowtype("Du har valt att spela Poker", 0.05)
+            slowtype("You decide to try your smarts in some quizzes", 0.05)
+            Quiz()
         elif casval == "5":
-            slowtype("Du har valt att spela Quiz", 0.05)
-        elif casval == "6":
             break
+
+def Quiz():
+    antalr = 0
+    pwon = 0
+    tidfrå = []
+    slowtype("Welcome to our quiz there are a total of 20 questions you can answer",0.05)
+    slowtype("You will only be able to answer each question once",.05)
+    slowtype("Each question is a bet of 5 gold, if you answer right you get 10 gold back",.05)
+    while True:
+        ras = rand.randint(5,8)
+        qr = rand.randint(0,5)
+        if qr in tidfrå:
+            continue
+        if antalr >= ras:
+            slowtype("The casino thinks you might be cheating they throw you out and take bake the money you won",.05)
+            playerclass.amoney(-pwon)
+            break
+        slowtype("Do you want a question?    Yes or no",.05)
+        quizval = input()
+        
+        quizval = quizval.upper()
+        if quizval == "YES":
+            tidfrå.append(qr)
+            slowtype(questions[qr],.1)
+            slowtype("What your answer ?      ( Answer with a number, example:  5  ))",.05)
+            
+            try:
+                qsvar = int(input())
+                if qsvar == qr:
+                        slowtype("Right answer!",.05)
+                        playerclass.amoney(5)
+                        antalr += 1
+                        pwon += 5
+                
+                if qsvar != qr:
+                            slowtype("Wrong answe dumb ass!",.05)
+                            slowtype(f"THe right answer was {qr}",0.05)
+                            playerclass.amoney(-5)
+                            antalr = 0
+
+            except:
+                slowtype("Your answer didn't have the correct format, there by the casions rules page two section one conercing answering of questions",.05)
+                slowtype("It says \"If the patron can't formulate a answer by the rules we have the freedom to still charge him the inital bet \"",.05)
+                playerclass.amoney(-5)
+        else:
+                slowtype("You leave the quiz",0.05)
+                break
+
+    
 
 def vägescape():  # Väg val på de olika vägarna
     vägval4 = input("Vill du gå vänster eller höger?")
