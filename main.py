@@ -45,6 +45,7 @@ monster_list3 = [Monster("Jätte", 400, 35, 1),
                  Monster("Golem", 450, 20, 1)]
 
 sandworm = Monster("Sandworm", 124, 24, 1)
+Boss = Monster("The king of darkness", 600, 100, 1)
 
 SkelettRaptor = Monster("Skelett Raptor", 100, 30, 1)
 # Gameplay
@@ -136,8 +137,11 @@ Reading = False
 
 Player_weapon = Hands
 
+levelup(20)
 
 def korsningen():
+    if playerclass.skog == True and playerclass.city == True and playerclass.grott == True:
+                   # Boss fight
     plats = rand.randint(1, 3)  # Bestämmer vilken väg som du kommer till
     väghem = rand.randint(1, 2)  # Slumpar om du kan komma hem
     if väghem == 1:  # Väg hem finns
@@ -970,6 +974,7 @@ def grottvägen(alive):
     print("Slutligen når du grottans mynning")
     time.sleep(2)
     print("Solens ljus träffar ditt ansikte, och du andas de1n friska luften")
+    playerclass.grott = True
     return 
 
 
@@ -1116,6 +1121,7 @@ def skogsvägen(alive):
             print("Du gav inte ett giltigt svar, svara om.")
         slowtype("Vinden blir starkare och starkare och framför dig ses en öppning mellan träden.",0.1)
         slowtype("Du har äntligen kommit ut ur den täta skogen och du kan nu fortsätta ditt äventyr starkare än någonsin.",0.1)
+        playerclass.skog = True
         break
 
 def abanondedcity(alive):
@@ -1266,6 +1272,7 @@ def abanondedcity(alive):
         except:
             print("Du gav inte ett giltigt svar, svara om.")
     slowtype("Efter denna otroligt långa och spännande turen genom staden så kan du äntligen fortsätta frammåt och besegra alla som kommer i din väg.",0.1)
+    playerclass.city = True
     return
 
 def biblloktekt():
