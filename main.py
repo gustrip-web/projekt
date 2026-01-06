@@ -137,11 +137,10 @@ Reading = False
 
 Player_weapon = Hands
 
-levelup(20)
 
 def korsningen():
     if playerclass.skog == True and playerclass.city == True and playerclass.grott == True:
-                   # Boss fight
+        pass  # Boss fight
     plats = rand.randint(1, 3)  # Bestämmer vilken väg som du kommer till
     väghem = rand.randint(1, 2)  # Slumpar om du kan komma hem
     if väghem == 1:  # Väg hem finns
@@ -648,18 +647,21 @@ def casion():
             Quiz()
         elif casval == "5":
             break
-
 def Quiz():
     antalr = 0
     pwon = 0
-    tidfrå = []
+    fråde = []
     slowtype("Welcome to our quiz there are a total of 20 questions you can answer",0.05)
     slowtype("You will only be able to answer each question once",.05)
     slowtype("Each question is a bet of 5 gold, if you answer right you get 10 gold back",.05)
+    
     while True:
+        if len(fråde) == 21:
+            slowtype("It appears that you have answerd all questions we have...",0.05)
+            return
         ras = rand.randint(5,8)
-        qr = rand.randint(0,5)
-        if qr in tidfrå:
+        qr = rand.randint(0,20)
+        if qr in fråde:
             continue
         if antalr >= ras:
             slowtype("The casino thinks you might be cheating they throw you out and take bake the money you won",.05)
@@ -670,7 +672,7 @@ def Quiz():
         
         quizval = quizval.upper()
         if quizval == "YES":
-            tidfrå.append(qr)
+            fråde.append(qr)
             slowtype(questions[qr],.1)
             slowtype("What your answer ?      ( Answer with a number, example:  5  ))",.05)
             
@@ -695,6 +697,7 @@ def Quiz():
         else:
                 slowtype("You leave the quiz",0.05)
                 break
+    return
 
     
 
@@ -1465,6 +1468,7 @@ def main(alive):
             casion()
         else:
             pass
+
 
 main(alive)
 # li = []
