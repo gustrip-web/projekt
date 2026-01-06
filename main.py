@@ -5,6 +5,7 @@ from items import *
 from character import *
 import time
 from questions import *
+from spara import *
 
 # Characters
 tank = Characterclass("Mr.Tank", 200, 10, 0.1, 2)
@@ -49,15 +50,23 @@ Boss = Monster("The king of darkness", 600, 100, 1)
 
 SkelettRaptor = Monster("Skelett Raptor", 100, 30, 1)
 # Gameplay
+
+def slowtype(text, tid):
+    for a in text:
+        print(a, end="", flush=True)   # End hindrar nyrad,    flush låter termineln skriva ut induviduella tecken innan hela raden är klar
+        time.sleep(tid)
+    print("\n")
+
 print("""
          Welcome to the Sweelept!""")
+loaded = False
 while True:
     print(""" 
      Read about the Classes:
      1. Warrior               3. Tank
      2. Magiacan              4. Gambler
      
-            5. Choose your class
+            5. Choose your class   6. Load save
      """)
     
     infosvar = input("Vad vill du göra? ")
@@ -125,22 +134,29 @@ while True:
             break
         else:
             print("skriv ett tal")
+    elif infosvar == "6":
+        playerclass = load_player()
+        loaded = True  
+        slowtype(f"Du laddade in dina gammla save som {playerclass.name} med {playerclass.money} guld",0.05)          # Hoppa namgivarnaern
+        break
     else:
         print("skriv ett tal")
-
-playername = input("Vad ska din karaktär heta? ")
-print(f"Du valde namnet {playername}!")
+if loaded == False:
+    playername = input("Vad ska din karaktär heta? ")
+    print(f"Du valde namnet {playername}!")
+    playerclass.weapon = Hands
+    print("load false")
 alive = True
-adventuring = False
-Shopping = False
-Reading = False
 
-Player_weapon = Hands
-
+def the_final_struggle(alive):
+    alive = battle(Boss, playerclass, alive)
+    if alive == False:
+        slowtype("")
+        return playerclass.alive
 
 def korsningen():
     if playerclass.skog == True and playerclass.city == True and playerclass.grott == True:
-        pass  # Boss fight
+        the_final_struggle(alive)
     plats = rand.randint(1, 3)  # Bestämmer vilken väg som du kommer till
     väghem = rand.randint(1, 2)  # Slumpar om du kan komma hem
     if väghem == 1:  # Väg hem finns
@@ -201,13 +217,13 @@ def Markanden():
         elif köpval == "2":  #dolk
             if playerclass.money >= 20:
                 playerclass.amoney(-20)
-                Vapen = weapon_list1[0]
+                Vapen = weapon_list1[1]
                 playerclass.weapon = Vapen
             print("Ditt nya vappen är en Dolk")
         elif köpval == "3":  #Smörkniv
             if playerclass.money >= 10:
                 playerclass.amoney(-10)
-                Vapen = weapon_list1[1]
+                Vapen = weapon_list1[2]
                 playerclass.weapon = Vapen
                 print("Ditt nya vappen är Smörkniv")
             else:
@@ -215,7 +231,7 @@ def Markanden():
         elif köpval == "4":   #YXA
             if playerclass.money >= 40:
                 playerclass.amoney(-40)
-                Vapen = weapon_list1[2]
+                Vapen = weapon_list1[3]
                 playerclass.weapon = Vapen
                 print("Ditt nya vappen är Yxa")
             else:
@@ -223,7 +239,7 @@ def Markanden():
         elif köpval == "5":    #Knogjärn
             if playerclass.money >= 30:
                 playerclass.amoney(-30)
-                Vapen = weapon_list1[30]
+                Vapen = weapon_list1[4]
                 playerclass.weapon = Vapen
                 print("Ditt nya vappen är Knogjärn")
             else:
@@ -647,29 +663,28 @@ def casion():
             Quiz()
         elif casval == "5":
             break
+fråde = []
 def Quiz():
-    antalr = 0
-    pwon = 0
-    fråde = []
+    antalr = 0      # antal rätt i rad
+    pwon = 0  # sparar hur mycket player vunnit totalt så kasinot kan ta tillbaka det
     slowtype("Welcome to our quiz there are a total of 20 questions you can answer",0.05)
     slowtype("You will only be able to answer each question once",.05)
     slowtype("Each question is a bet of 5 gold, if you answer right you get 10 gold back",.05)
     
     while True:
-        if len(fråde) == 21:
-            slowtype("It appears that you have answerd all questions we have...",0.05)
-            return
+        if len(fråde) == 21:                 # Gjort för att man inte ska kunnas vara på frågor man redan fått och därmed kan 
+            slowtype("It appears that you have answerd all questions we have...",0.05) 
+            return                               # Går att runda genom att load saven så kommer fråde omställas
         ras = rand.randint(5,8)
-        qr = rand.randint(0,20)
+        qr = rand.randint(5,7)
         if qr in fråde:
             continue
         if antalr >= ras:
             slowtype("The casino thinks you might be cheating they throw you out and take bake the money you won",.05)
-            playerclass.amoney(-pwon)
+            playerclass.amoney(-pwon)-j
             break
         slowtype("Do you want a question?    Yes or no",.05)
         quizval = input()
-        
         quizval = quizval.upper()
         if quizval == "YES":
             fråde.append(qr)
@@ -721,11 +736,7 @@ def monsterpullar():
     print(f"Du ser monstret {monsterval.name}")
     return monsterval
 
-def slowtype(text, tid):
-    for a in text:
-        print(a, end="", flush=True)   # End hindrar nyrad,    flush låter termineln skriva ut induviduella tecken innan hela raden är klar
-        time.sleep(tid)
-    print("\n")
+
 
 
 
@@ -1428,7 +1439,9 @@ def main(alive):
         print(f"""          Sweelept
         1. Äventyr       2. Markanden       3. Bibloteket
     
-                    4. Stats allocation  5. Casino
+            4. Inventory     5. Casino
+            
+                         6. Save  
             """)
         time.sleep(1)
         Platsval = input("Vad vill du välja? ")
@@ -1462,10 +1475,13 @@ def main(alive):
             
 
         elif Platsval == "4":
-            print("hej")
+            playerclass.show_inventory()
+            playerclass.show_weapon()
             # Stats allocation och stat check
         elif Platsval == "5":
             casion()
+        elif Platsval == "6":
+            save_player(playerclass)   
         else:
             pass
 

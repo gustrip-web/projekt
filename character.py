@@ -1,5 +1,12 @@
 from items import *
 import random as rand
+import time
+
+def slowtype(text, tid):
+    for a in text:
+        print(a, end="", flush=True)   # End hindrar nyrad,    flush låter termineln skriva ut induviduella tecken innan hela raden är klar
+        time.sleep(tid)
+    print("\n")
 
 class Characterclass():
     def __init__(self, name, hp, str, critrate, crit_damage):
@@ -61,6 +68,9 @@ class Characterclass():
         for i, item in enumerate(self.inventory, start=1):
             print(f"{i}. {item.name} (+{item.health_boost} HP, +{item.damage_boost} DMG)")
         print("------------------\n")
+    
+    def show_weapon(self):
+        slowtype(f"Ditt vapen är {self.weapon.name}",0.1)
 
     def use_item(self, item_name):
         for item in self.inventory:
