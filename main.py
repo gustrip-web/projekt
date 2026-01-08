@@ -1116,8 +1116,25 @@ def skogsvägen(alive):
                             slowtype("Du följer med damen.",0.1)
                             slowtype("Stugan är full med olika grejer, massor med olika växter och annat från skogen.",0.1)
                             slowtype("Varför bor du här ute? Frågar du damen.")
-                            slowtype("")
+                            slowtype("Jag har alltid bott i dessa skogar. De är hela min barndom och jag kan inte få mig själv att flytta där ifrån. Det är också lungt dagarna om och jag slipper oftast personer som dig. Svarar damen", 0.1)
+                            slowtype("Jahopp då, får du ur dig.",0.1)
+                            time.sleep(1)
+                            while True:
+                                try:
+                                    damfråga3 = int(input("""Gjorde min favoritgryta till middag, vill du ha? Frågar damen. Vad gör du?
+                                    1. Du tar villigt emot maten    2. Du avstår"""))
+                                    if damfråga3 ==1:
+                                        break
+                                    if damfråga ==2:
+                                        slowtype("Jag kan avstå. Säger du.",0.1)
+                                        slowtype("")
+                                        break
+                                    else:
+                                        print("Du gav inte ett giltigt svar, svara om.")
+                                except:
+                                    print("Du gav inte ett giltigt svar, svara om.")
                             break
+                        
                         elif damfråga2 ==2:
                             slowtype("Nej, svarar du och går din väg djupare in i skogen utan att kolla tillbaka.")
                             break
