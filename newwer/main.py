@@ -175,7 +175,7 @@ if loaded == False:
         playerclass.add_exp(50)
     slowtype(f"Du valde namnet {playerclass.pname}!", 0.05)
     input("Tryck enter för att fortsätta -> ")
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear')                #Den rensar terminalen, os är kopplat till operativsystemet och kan då kommunicera med den, den säger om os.name = nt vilket det är på windowsplatformas så kommer den att "cls" vilket är ett kommando på windowsplattformar för att rensa terminalen. Om os.name inte är nt som på exempelvis mac/linux så kommer den istället att "clear" vilket är kommandot att rensa terminalen på mac/linux. Så det går att rensa terminalen oavsätt vilken sorts plattform man använder.
     playerclass.weapon = Hands
 alive = True
 
@@ -246,10 +246,10 @@ def Marknaden():
             4. Yxa           Damage: 2x       Crit factor: 5%     Pris: 40 guld
             5. Knogjärn      Damage: 1.2x     Crit factor: 25%    Pris: 30 guld
 
-        Items: 6. Small Health Potion    + 15 Hp            Pris: 10 guld
-               7. Medium Health Potion    + 30 Hp            Pris: 18 guld       OBS!!! Du kan bara heala i menyn
-               8. Big Health Potion      + 60 Hp            Pris: 35 guld
-               9. Damage boost           10 % Damage boost  Pris: 40 guld
+        Items: 6. Small Health Potion    + 15 Hp            Pris: 15 guld
+               7. Medium Health Potion   + 30 Hp            Pris: 28 guld       OBS!!! Du kan bara heala i menyn
+               8. Big Health Potion      + 60 Hp            Pris: 50 guld
+               9. Damage boost           10 % Damage boost  Pris: 50 guld
 
                q. Lämna affären
         """, 0.005)
@@ -294,26 +294,26 @@ def Marknaden():
             else:
                 slowtype("Du har inte tillräckligt med guld", 0.05)
         elif köpval == "6":
-            if playerclass.money >= 10:
-                playerclass.amoney(-10)
+            if playerclass.money >= 15:
+                playerclass.amoney(-15)
                 playerclass.add_item(Item_list1[0])
             else:
                 slowtype("Du har inte tillräckligt med guld", 0.05)
         elif köpval == "7":
-            if playerclass.money >= 18:
-                playerclass.amoney(-18)
+            if playerclass.money >= 28:
+                playerclass.amoney(-28)
                 playerclass.add_item(Item_list1[1])
             else:
                 slowtype("Du har inte tillräckligt med guld", 0.05)
         elif köpval == "8":
-            if playerclass.money >= 35:
-                playerclass.amoney(-35)
+            if playerclass.money >= 50:
+                playerclass.amoney(-50)
                 playerclass.add_item(Item_list1[2])
             else:
                 slowtype("Du har inte tillräckligt med guld", 0.05)
         elif köpval == "9":
-            if playerclass.money >= 40:
-                playerclass.amoney(-40)
+            if playerclass.money >= 50:
+                playerclass.amoney(-50)
                 playerclass.add_item(Item_list1[3])
             else:
                 slowtype("Du har inte tillräckligt med guld", 0.05)
@@ -1258,7 +1258,7 @@ Luften blir kylig och stilla. Något prasslar mellan stammarna, men du kan inte 
                 break
             else:
                 slowtype("Du gav inte ett giltigt svar, svara om.", 0.05)
-        except ValueError:
+        except ValueError:                                                                                         #Använder valueerror så att koden hoppar över såbuggar som inte gör någonting och startar om loopen
             slowtype("Du gav inget ett giltigt svar, svara om.", 0.05)
     
     time.sleep(1)
@@ -1655,7 +1655,7 @@ def main(alive):
             os.system('cls' if os.name == 'nt' else 'clear')
             playerclass.show_inventory()
             playerclass.show_weapon()
-            slowtype("Vill du konsumera något i dtt inventory?  Ja eller Nej",0.05)
+            slowtype("Vill du konsumera något i ditt inventory?  Ja eller Nej",0.05)
             invval = input()
             invval = invval.upper()
             if invval == "JA":

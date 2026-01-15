@@ -11,6 +11,7 @@ def slowtype(text, tid):
 class Characterclass():
     def __init__(self, name, hp, str, critrate, crit_damage):
         self.name = name
+        self.pname = None
         self.hp = hp
         self.str = str
         self.lvl = 1
@@ -30,17 +31,14 @@ class Characterclass():
     def exp_required(self):
         return int(20 * (1.5 ** (self.lvl - 1)))    # Switcha denna för mer balnce och jämnare tal vi lvl ups
 
-    
-
-    
-        
-
     def level_up(self):
         self.lvl += 1
-        self.str *= 1.10
-        self.hp *= 1.05
-        print(f"{self.name} levla upp till {self.lvl}!")
-
+        newstr = self.str * 1.10
+        self.str = round(newstr)
+        newhp = self.hp * 1.10
+        self.hp = round(newhp)
+        slowtype(f"{self.name} levla upp till {self.lvl}!",.05)
+        slowtype(f"Din bas skada {self.str}", 0.05)
 
     def add_exp(self, reward):
         self.exp += reward
@@ -50,35 +48,36 @@ class Characterclass():
     
     def amoney(self, belopp):
         self.money += belopp
-        print(f" Du har nu {self.money} pengar")
+        slowtype(f"Du har nu {self.money} pengar",0.05)
         
 
 
 # INVENTORY
     def add_item(self, item):
         self.inventory.append(item)
-        print(f"Du plockade upp: {item.name}")
+        slowtype(f"Du plockade upp: {item.name}",0.05)
 
     def show_inventory(self):
         if not self.inventory:
-            print("Inventory är tomt.")
+            slowtype("Inventory är tomt.", 0.05)
             return
 
-        print("\n--- INVENTORY ---")
+        slowtype("\n--- INVENTORY ---",0.01)
         for i, item in enumerate(self.inventory, start=1):
-            print(f"{i}. {item.name} (+{item.health_boost} HP, +{item.damage_boost} DMG)")
-        print("------------------\n")
+            slowtype(f"{i}. {item.name} (+{item.health_boost} HP, *{item.damage_boost} DMG)",0.01)
+        slowtype("------------------\n",0.01)
     
     def show_weapon(self):
-        slowtype(f"Ditt vapen är {self.weapon.name}",0.1)
+        slowtype(f"Ditt vapen är {self.weapon.name}",0.05)
 
     def use_item(self, item_name):
         for item in self.inventory:
             if item.name.lower() == item_name.lower():
                 self.hp += item.health_boost
-                self.str += item.damage_boost
-                print(f"Du använde {item.name}!")
-                print(f"Ny HP: {self.hp}, Ny DMG: {self.str}")
+                self.str *= item.damage_boost
+                slowtype(f"Du använde {item.name}!",0.05)
+                slowtype(f"Ny HP: {self.hp}, Ny DMG: {self.str}",0.05)
                 self.inventory.remove(item)
+
                 return
-        print("Du har inte det föremålet!")
+        slowtype("Du har inte det föremålet!",0.05)
