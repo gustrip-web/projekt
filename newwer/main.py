@@ -1,4 +1,4 @@
-# SÄTT TILL
+# KOLLA PÅ GROTTVÄGEN HISS, LWK LITE KONSTIG
 from monster import *
 import random as rand
 from items import *
@@ -97,7 +97,7 @@ while True:
         tillräckligt tåliga för att överleva, tillräckligt smarta för att anpassa sig.
         För en Warrior är varje strid en chans att bevisa att viljekraft alltid är starkare än ödet
         
-        HP: 5/10    Dmg: 5/10   Critrate: 10%   Crit multiplier: 2x
+        HP: 5/10    Dmg: 5/10   Critrate: 15%   Crit multiplier: 2x
         """, 0.005)
         input("Tryck enter för att fortsätta -> ")
     elif infosvar == "2":
@@ -130,7 +130,7 @@ while True:
         Deras strider präglas av vilda svängningar – från förödande kritiska träffar till total kollaps – och de accepterar båda resultaten som en del av spelet.
         Gambler vandrar mellan bord, tavernor och slagfält, alltid jagad av lyckans nyckfulla hand.
         
-        HP: 5/10    Dmg: 1/10   Critrate: 30%   Crit multiplier: 200x
+        HP: 5/10    Dmg: 1/10   Critrate: 30%   Crit multiplier: 250x
         """, 0.005)
         input("Tryck enter för att fortsätta -> ")
     elif infosvar == "5":
@@ -882,7 +882,7 @@ def grottvägen(alive):
         slowtype("Du är i en lång rak grotta du inte kan se slutet på", 0.05)
         time.sleep(1)
         slowtype("I perferin ser du rörelser, du vänder dig snabbt om och ser någonting springande mot dig", 0.05)
-        time.sleep(1)
+        time.sleep(2)
         os.system('cls' if os.name == 'nt' else 'clear')
         monsterval = monsterpullar()
         alive = battle(monsterval, playerclass, alive)
@@ -908,7 +908,7 @@ def grottvägen(alive):
         input("Tryck enter för att fortsätta ->")
         os.system('cls' if os.name == 'nt' else 'clear')
     slowtype("Efter stenraset går du vidare", 0.05)
-    slowtype("Efter ett tag kommer du till en korsning", 0.05)
+    slowtype("En stund senare kommer du fram till en korsning", 0.05)
     slowtype("En skylt sitter uppsatt, på den står det", 0.05)
     slowtype("Gå vänster om du vill leva", 0.05)
 
@@ -942,7 +942,7 @@ def grottvägen(alive):
         slowtype("Du fortsätter gå framåt", 0.05)
         slowtype("Rarariarar!", 0.05)
         slowtype("Någonting drar dig ner under vattnet", 0.05)
-        slowtype(f"Du ser monstret Fisk Människa", 0.1)
+        slowtype(f"Du ser monstret Lil Floppa", 0.1)
         slowtype("""
 ⠿⡼⢳⢯⡿⣽⣛⣎⣳⣭⣞⣶⣳⣤⢦⣴⣿⣏⢯⣙⡾⣵⢊⠶⢦⠞⠳⢴⣶⡄⠀⠰⣶⣦⠀⠀⠀⠀⠉⠠⠀⠈⠤⣴⣶⣶⣶⣶⣶⣶⣶⣶⣶⣄⠀⠀⣤⣶⠊⠁⠀⠀⠀⢀⠀⠀⠀⣉⠈⠉⠉⠁⠀⠈⠁⠀⠈⢻⣌⠇⣛⠧⣹⠳⠄⢛⡈⠁⡀⠄⡙⠛⡶⢭⠶⣀⣋⢀⡁⡁⠼⠧⣘⣳⠽⣛⢯⡙⣭⠻⡕⠚⠛⠻⠯⢟⣹⣎⢯⠛
 ⣑⣬⣣⢎⡴⣥⠭⡌⢥⡹⡜⡜⠣⠎⠇⣿⣿⡟⠋⡁⠓⠈⡁⠠⠈⠀⠀⡼⠛⠃⠀⠀⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⣽⣿⡟⠻⣏⣩⠿⠛⠛⠋⠋⠀⠀⣿⣿⠀⠀⠀⠀⠀⠀⢀⡠⠤⠋⠋⠓⠒⠛⠓⠀⠰⠤⠄⠀⠈⠛⠋⠛⠚⠳⢤⡬⣝⠃⠛⠃⠬⠷⠼⢳⣏⠿⣭⠾⣵⢫⠖⡾⢥⣤⡑⣌⠢⣉⠄⡁⠤⠬⡔⠂⠒⠉⠓⠬⡷⢶
@@ -1009,8 +1009,8 @@ def grottvägen(alive):
         slowtype("Du väljer att inte störa det mystiska ljudet och fortsätter framåt", 0.05)
         slowtype("Sanden knastrar under dina fötter och gångarna blir smalare", 0.05)
         slowtype("Plötsligt ser du en stor hiss", 0.05)
-        slowtype("Den ser gammal ut men den kanska funkar", 0.05)
-        hissvar = input("Vill du trycka på hissknappen?")
+        slowtype("Den ser gammal ut men den kanska funkar", 0.05)                       
+        hissvar = input("Vill du trycka på hissknappen?")                                           #VAD HÄNDER HÄR
         if hissvar == "ja":
             pass
 
@@ -1033,7 +1033,7 @@ def grottvägen(alive):
         slowtype("Draken öppnar ett öga och låter ett öronbedövande vrål", 0.05)
         slowtype("Det ser ut som att den kallar på hjälp",0.05)
         slowtype("Ett monster kommer plötsligt bakifrån dig och försöker göra en överaskningsattack.",0.05)
-        slowtype("Men du är snabb och undviker den första slag.", 0.05)
+        slowtype("Men du är snabb och undviker den första slaget.", 0.05)
         time.sleep(1)
         # Kalla draken som monster
         monsterval = monsterpullar()
@@ -1055,8 +1055,8 @@ def grottvägen(alive):
             "Vill du, 1. smyga undan     2. konfrontera figuren? ", 0.05)
         stealth_choice = input("-> ")
         if stealth_choice == "1":
-            slowtype("Du kryper längs väggen, men  du råkar trampa snett och ramlar ", 0.05)
-            slowtype("Du vänder dig om och ser att skuggfiguerna är påväg mot dig",0.1)
+            slowtype("Du försöker krypa längs väggen, men du råkar trampa snett och ramlar ", 0.05)
+            slowtype("Du vänder dig om och ser att skuggfiguern är påväg mot dig",0.1)
             alive = battle(Skuggriddare, playerclass, alive)
             if alive == False:          # Alive ändras i battle func
                 return alive
