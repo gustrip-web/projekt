@@ -17,6 +17,7 @@ gambler = Characterclass("Gambler", 100, 1, 0.3, 250)  # Däför är en högre I
                                                       # Än dmg som ibland kan vara låg pga battle. Detta är flaw som jag känner till. Vilket gör om man timear lvl dåligt
                                                    # Så kan man inte uttnyttja hp lvl up bra.
 
+
 # Weapon
 
 Hands = Weapon("Händer", 1, 0.001, 1.2)
@@ -172,7 +173,7 @@ if loaded == False:
     playerclass.pname = input("Vad ska din karaktär heta? ")
     if playerclass.pname == "N":
         playerclass.amoney(1000)
-        playerclass.add_exp(50)
+        playerclass.add_exp(22)
     slowtype(f"Du valde namnet {playerclass.pname}!", 0.05)
     input("Tryck enter för att fortsätta -> ")
     os.system('cls' if os.name == 'nt' else 'clear')                #Den rensar terminalen, os är kopplat till operativsystemet och kan då kommunicera med den, den säger om os.name = nt vilket det är på windowsplatformas så kommer den att "cls" vilket är ett kommando på windowsplattformar för att rensa terminalen. Om os.name inte är nt som på exempelvis mac/linux så kommer den istället att "clear" vilket är kommandot att rensa terminalen på mac/linux. Så det går att rensa terminalen oavsätt vilken sorts plattform man använder.
@@ -325,9 +326,9 @@ def Marknaden():
     return 
 
 def spin_number():
-    n = 0.008
-    for delay in [n]*129:
-        o = rand.randint(1, 4)      
+    n = 0.008                          # Har med delayn i spinning at göra 
+    for delay in [n]*129:              # För värdet på N är tiden mellan printenerna, 129 är testa till det såg nice ut ahh antal
+        o = rand.randint(1, 4)         # Obvious
         if o == 1:
             b = "🍒"         
         elif o == 2:
@@ -337,11 +338,11 @@ def spin_number():
         elif o == 4:
             b = "💎"
 
-        print(f"\rSpinning: {b}", end=""  , flush=True)
+        print(f"\rSpinning: {b}", end=""  , flush=True)  # \r gör att den hoppar tillbaka på ny rad, end="" förhindrar ny rad, varje print, Flush skriver ut direkt
         time.sleep(n)
         n += n*n
 
-
+    # Samma sak det kanske finns ett effektivare sätt med mindre kod dock
     if o == 1:
             b = "🍒"         
     elif o == 2:
@@ -351,7 +352,7 @@ def spin_number():
     elif o == 4:
             b == "💎"
     print(f"\rResult:   {b} ")
-    return
+    return b                 # Returna resulatet
 
 def slots():
     slowtype("Välkommen till slotsen", 0.05)
@@ -360,7 +361,7 @@ def slots():
     slowtype("varje spin kostar 5 guld", 0.05)
     while True:
         slowtype(f"Du har {playerclass.money} guld", 0.05)
-        if playerclass.money >= 1:
+        if playerclass.money >= 4:
             slot = input("Vill du spinna? Ja / Nej").upper()
             if slot == "NEJ":           # Gjort med mening för just här måste man säga exact rätt för att dra
                 slowtype("Kom tillbaka tills slots snart, nästa vinst är bara ett drag ifrån!", 0.05)
@@ -386,7 +387,7 @@ def carddraw(kortlek, num):
     lef = len(num)      # Antal borttagna kort
     ko = rand.randint(0,51-lef)    #Drar bort antal tagna kort från range av index som slumpas fram
     kort = kortlek[ko]            # Drar ett kort vid ett visst index
-    kortlek.pop(ko)              #Tar bort det indexet så kortet inte kan dras igen
+    kortlek.pop(ko)              #Tar bort det indexet så kortet inte kan dras igen, vilket försäkrar realistisk lek
     slowtype(f"The card {kort} was pulled", 0.05)       # marker vilket kort som dragits
     if kort == 11:             # Gör om korten till rätta värderna 
         kort = 10
@@ -399,8 +400,8 @@ def carddraw(kortlek, num):
     num.append(1)       #Lägger till att ett kort dragits
     return kort 
 
-def blackjack():
-    kortlek = list(range(2,15))*4          #flyttade in de i de funktion?   Generar en kortelek med 4st av varje kort
+def blackjack():            # Self kreatvitet och problem träning med påhittad struktur på blackjack, G
+    kortlek = list(range(2,15))*4         #   Generar en kortelek med 4st av varje kort
     num = []                             #Lagar hur många kort som tagits
     slowtype("Blackjack is one of the most famous card games in the world.",0.05)
     slowtype("You wanna hear about the Rules? Yes or No" , 0.05)
@@ -418,7 +419,7 @@ def blackjack():
         bet= input()  # Regesterar bet
         try:
             bet = int(bet)           # Sorterar ut tal som inte är intergers
-        except:
+        except:                # if  bet != int  körs loopen om
             continue
         if bet == 0:
             break
@@ -427,10 +428,10 @@ def blackjack():
             spelarsumma = 0                  #Skapar vairbael
             spelar1 = carddraw(kortlek, num)   
             spelar2 = carddraw(kortlek, num) #Ger cardraw arguemenet kortlek och num som sparas från förra carddraw
-            spelar2str = str(spelar2)       # Skaar str veriosner i syfte att lägga in det i en lista
+            spelar2str = str(spelar2)       # Skapar str veriosner i syfte att lägga in det i en lista 
             spelar1str = str(spelar1)
             dealer1 = carddraw(kortlek,num)
-            spelarlista = [spelar1str] + [spelar2str]   # Skapar lista
+            spelarlista = [spelar1str] + [spelar2str]   # Skapar lista som spelaren ser sen
             if spelar1 == "A":     # Gör om värdet på på "A" till 11 i syfte att ge det till värde summa
                 spelar1 = 11
             if spelar2 == "A":
@@ -451,7 +452,7 @@ def blackjack():
             while spelarsumma<= 21 and dealersumma < 22 and avgjort == False:   # Nedans körs om ingen värde  är över 21 och det inte är avgjort ( sist i stand elif)
                 slowtype(f"Du har korten {spelarlista[:n]} summa: {spelarsumma}  Dealarn har {dealarlista[:s]}", 0.05)   # ger infomration om utgångsläget
                 slowtype("You wanna hit or stand? H / S", 0.05)
-                ba1 = input("->").upper()   #Val
+                ba1 = input("->")   #Val
                 ba1 = ba1.upper()          # Felhantering
                 if ba1 == "H":
                     spelar3 = carddraw(kortlek,num)
@@ -463,23 +464,24 @@ def blackjack():
                             if spelarlistanum[i] == "A":        # Om elementet på sen specfik plats är lika med A så byts den till värdet 11
                                 spelarlistanum[i] = "11"
                     spelarsumma  += int(spelarlistanum[n])
-                    if spelarsumma > 21:
+                    if spelarsumma > 21:         # Drar ner spelaren värde, ifall den har för har ett ess enlight reglerna
                         
-                        if "11" in spelarlista:
+                        if "11" in spelarlista:    # Gör om ess till 1 och tar bort värdet
                             spelarsumma -= 10 
                             i = spelarlista.index("11")
                             spelarlista[i] = "1"
                         
                     n+=1
                 
-                elif ba1 == "S":
-                    if dealer1 == "A":
+                elif ba1 == "S":   #Körs när playern väljer att standa
+                    if dealer1 == "A": 
                         dealer1 = 11
                     dealersumma += dealer1
-                    while dealersumma <= 21 and dealersumma < spelarsumma:
-                        slowtype(f"Du har {spelarlista[:n]} summa: {spelarsumma}. Delarn har {dealarlista[:s]} summa: {dealersumma}", 0.07)
+                    while dealersumma <= 21 and dealersumma < spelarsumma: # Dealern ska ta kort tills den har lika poänbg som playern
+                        slowtype(f"Du har {spelarlista[:n]} summa: {spelarsumma}. Delarn har {dealarlista} summa: {dealersumma}", 0.07)
                         slowtype("Dealern pulls", 0.05)
                         dealarnew = carddraw(kortlek,num)
+                        dealarnew = "A"
                         vas = str(dealarnew)
                         dealarlista.append(vas)
                         dealernum = dealarlista
@@ -488,14 +490,14 @@ def blackjack():
                                     if dealernum[i] == "A":        # Om elementet på sen specfik plats är lika med A så byts den till värdet 11
                                         dealernum[i] = "11"
                         dealersumma  += int(dealernum[s])
-                        s += 1
+                        s += 1                 # värde så additionen av värdet fråm listan blir rätt 
                         if dealersumma > 21:
                             if "11" in dealarlista:
                                 dealersumma -= 10 
-                                s = dealarlista.index("11")
-                                dealarlista[i] = "1"
+                                e = dealarlista.index("11")  # Gör om 11 till 1 
+                                dealarlista[e] = "1"
                         time.sleep(2)
-                    avgjort = True
+                    avgjort = True    #Det är alltid avgjort här
 
                     
                 else:
@@ -511,7 +513,7 @@ def blackjack():
                 slowtype("you won", 0.05)
                 playerclass.amoney(bet)
             elif spelarsumma > dealersumma:
-                slowtype("Du vann", 0.05)
+                slowtype("Du vann", 0.05)             # Vinst utdeling
                 playerclass.amoney(bet)
             elif dealersumma > spelarsumma:
                 slowtype("Du förlorade", 0.05)
@@ -713,7 +715,10 @@ def casino():
         elif casval == "5":
             break
 fråde = []
-def Quiz():
+def Quiz():    # Hur kan man göra ett simpelt quiz game? Där jag inte behöver kontrollera svar som är str, använd numer det är klart
+               # Men man måste fortfarande ha ett tillhörande värde till varje fråga som är själva svaret. Jag tänkte till och insåg
+               # att det lättaste är bara att låta svaret vara indexet från fråge listan i question.py. Då kan man rand en index för att få fram frågan
+               # Som också är själva svaret vilket gör det lätt att checka av.
     antalr = 0      # antal rätt i rad
     pwon = 0  # sparar hur mycket player vunnit totalt så kasinot kan ta tillbaka det
     slowtype("Welcome to our quiz there are a total of 20 questions you can answer",0.05)
@@ -723,24 +728,24 @@ def Quiz():
     while True:
         if len(fråde) == 21:                 # Gjort för att man inte ska kunnas vara på frågor man redan fått och därmed kan 
             slowtype("It appears that you have answerd all questions we have...",0.05) 
-            return                               # Går att runda genom att load saven så kommer fråde omställas
-        ras = rand.randint(5,8)
-        qr = rand.randint(0,19)
-        if qr in fråde:
-            continue
-        if antalr >= ras:
+            return                               # Går att runda genom att load save eftersom svarde inte frågor på nåt sätt sparas
+        ras = rand.randint(5,12)      # Rand max svar innan casiont tror du fuskar, om någon t.ex. googlar, ska det vara lite irriterande
+        qr = rand.randint(0,19)   
+        if qr in fråde:  # Kollar om nr valda frågan frågats förut. 
+            continue       # Hoppar tillbaka utan att spelare får reda på nåt
+        if antalr >= ras:     # Casion shananigans
             slowtype("The casino thinks you might be cheating they throw you out and take bake the money you won",.05)
-            playerclass.amoney(-pwon)-j
+            playerclass.amoney(-pwon)     #Tar tillbaka alla pengar du vunnit
             break
         slowtype("Do you want a question?    Yes or no",.05)
         quizval = input()
         quizval = quizval.upper()
         if quizval == "YES":
-            fråde.append(qr)
-            slowtype(questions[qr],.1)
+            fråde.append(qr)         #Adderar frågan index till 
+            slowtype(questions[qr],.1)   #Rotar fram frågan från indexet qr på listans questions
             slowtype("What your answer ?      ( Answer with a number, example:  5  ))",.05)
             
-            qsvar = int(input())
+            qsvar = int(input())  # svar
             try:
                 if qsvar == qr:
                         slowtype("Right answer!",.05)
@@ -750,7 +755,7 @@ def Quiz():
                 
                 if qsvar != qr:
                             slowtype("Wrong answer dumb ass!",.05)
-                            slowtype(f"THe right answer was {qr}",0.05)
+                            slowtype(f"We wont tell you the right answer either",0.05)
                             playerclass.amoney(-5)
                             antalr = 0
 
@@ -782,7 +787,7 @@ def vägescape():  # Väg val på de olika vägarna
 
 def monsterpullar():
     if playerclass.lvl < 4:
-        monsterlista = monster_list1
+        monsterlista = monster_list1       # För att balanca gamet så har vi olika svårighetsgrader på monster som tas fram utifrån player lvl
     elif playerclass.lvl >= 7:
         monsterlista = monster_list3
     elif playerclass.lvl >= 4:
@@ -797,8 +802,8 @@ def monsterpullar():
 
 
 
-def battle(monsterval, playerclass, alive):
-    while playerclass.hp > 0 and monsterval.hp > 0:
+def battle(monsterval, playerclass, alive):  # Parametrar, monsterval från monsterpullar, playerclass med hp,dmg osv, och alive för att kunna ändra den om man dör 
+    while playerclass.hp > 0 and monsterval.hp > 0:   
 
         slowtype(f"""Vad vill du göra?   Du har {playerclass.hp} hp, och vapnet {playerclass.weapon.name}
         {monsterval.name} har {monsterval.hp} hp
@@ -808,12 +813,12 @@ def battle(monsterval, playerclass, alive):
 
         if battlec == "1":
 
-            dmg = playerclass.str * playerclass.weapon.damage 
+            dmg = playerclass.str * playerclass.weapon.damage   # Weapon dmg har mellan 1-2 faktor
 
-            all_critrate = playerclass.critrate + playerclass.weapon.critrate
-            if rand.random() <= all_critrate:
-                dmg *= playerclass.crit_damage * playerclass.weapon.crit_damage
-                dmg = round(dmg)         # Här gör man multipcirar man vapen_skada * karaktär_skada * karaktär_crit * vapen_crit
+            all_critrate = playerclass.critrate + playerclass.weapon.critrate    #Olika gubbar har olika critrate samma gäller vapen som adderas på varandra
+            if rand.random() <= all_critrate:  # Slumpar mellan 1 som jämförs med deicmaltal t.ex. 0,3 om det är under det så är det crit
+                dmg *= playerclass.crit_damage * playerclass.weapon.crit_damage  # Vanlig dmg* gånger wepon och player crit som båda är faktorer
+                dmg = round(dmg)         #avrunda för att slippa fula floats
                 slowtype(f"Du fick en crit!", 0.02)
             else:
                 pass
