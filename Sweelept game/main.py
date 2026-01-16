@@ -852,7 +852,7 @@ def battle(monsterval, playerclass, alive):  # Parametrar, monsterval från mons
             
             return 
         monsterdmg = monsterval.dmg
-        if rand.random() < 15:
+        if rand.random() < 0.15:
             monsterdmg *= 0
             slowtype("Monstert missade sin attack", 0.05)
             continue
