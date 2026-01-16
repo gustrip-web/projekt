@@ -852,13 +852,14 @@ def battle(monsterval, playerclass, alive):  # Parametrar, monsterval från mons
             
             return 
         monsterdmg = monsterval.dmg
+        if rand.random() < 15:
+            monsterdmg *= 0
+            slowtype("Monstert missade sin attack", 0.05)
+            continue
         if rand.random() < 0.1:
             monsterdmg *= monsterval.crit_damage
             monsterdmg = round(monsterval.dmg)
             slowtype("Monstret fick en crit!!!", 0.02)
-        if rand.random() < 0.15:
-            monsterdmg *= 0
-            slowtype("Monstert missade sin attack")
         slowtype(f"{monsterval.name} attackerar dig och gör {monsterval.dmg} skada!", 0.02)
         playerclass.hp -= monsterdmg
         slowtype(f"Nu har du {playerclass.hp}hp kvar", 0.02)
@@ -1605,9 +1606,12 @@ Nu ekar tystnaden mellan ruinerna, och platsen bär på historiens mysterier och
                                 time.sleep(0.5)
                                 slowtype("Only when that king of darkness is erased can the world's darkness disappaear", 0.05)
                                 time.sleep(0.5)
-                                slowtype("Now son, I wish that you get out there deafeat him",0.05)
+                                slowtype("Now son, I wish that you get out there defeat him",0.05)
                                 time.sleep(2)
                                 slowtype("Only then can i die happy", 0.05)
+                                time.sleep(2)
+                                slowtype("You have to delete the evil in all of the three roads, only then can you face The king of drakness",0.08)
+                                time.sleep(1)
                                 input("Tryck enter för att lämna biblioteket ->")
                                 break
                     break
