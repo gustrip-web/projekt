@@ -1081,7 +1081,7 @@ def grottvägen(alive):
         slowtype("Du rusar framåt och ignorerar fotstegen bakom dig", 0.05)
         time.sleep(2)
         slowtype("Pulsen dunkar i öronen men du känner ljuset bli starkare för varje steg", 0.05)
-        slowtype("Du har tagit dig ut levand denna gång, men det fortfarande någoting kvar där nere, något ondeskfullt",0.05)
+        slowtype("Du har tagit dig ut levande denna gång, men det fortfarande någoting kvar där nere, något ondeskfullt",0.05)
         input("->")
         return alive
 
