@@ -74,8 +74,10 @@ class Characterclass():
     def use_item(self, item_name):
         for item in self.inventory:                             #går igenom spelarens items
             if item.name.lower() == item_name.lower():             #kollar så att itemet som spelaren har skrivit att de vill använda matchar med items den har
-                self.hp += item.health_boost                #hp adderas
-                self.str *= item.damage_boost               #damage multipliceras
+                self.hp += item.health_boost 
+                self.hp = round(self.hp)               #hp adderas
+                self.str *= item.damage_boost   
+                self.str = round(self.str)            #damage multipliceras
                 slowtype(f"Du använde {item.name}!",0.05)       #Säger namnet på itemet du använde
                 slowtype(f"Ny HP: {self.hp}, Ny DMG: {self.str}",0.05)          #informerar spelaren om nya stats
                 self.inventory.remove(item)                 #tar bort itement ur inv eftersom att den bara ska användas 1 gång

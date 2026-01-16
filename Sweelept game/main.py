@@ -26,7 +26,7 @@ weapon_list1 = [Weapon("Svärd", 1.5, 0.1, 1.5),
                 Weapon("Smörkniv", 1.25, 0.9, 100),
                 Weapon("Yxa", 2, 0.05, 1.5),
                 Weapon("Knogjärn", 1.2, 0.25, 1.25),
-                Weapon("Golfklubba", 1.4, 0.20, 1.2)]
+                Weapon("Golfklubba", 1.4, 0.15, 1.2)]
 
 # Items
 Item_list1 = [Item("Small Health Potion", 15, 1),
@@ -35,36 +35,36 @@ Item_list1 = [Item("Small Health Potion", 15, 1),
               Item("Damage Potion", 0, 1.1)]
 
 # Monster
-monster_list1 = [Monster("Skeleton", 40, 20, 1.2),
-                 Monster("Goblin", 75, 10, 1.5),
-                 Monster("Goon", 35, 20, 1.2),
-                 Monster("Bandit", 50, 13, 1.1),
-                 Monster("Zombie",60, 12, 1.2),
-                 Monster("Spider", 50, 10, 1.3),
-                 Monster("Cannibal",45, 14, 1.5),
-                 Monster("Gnome", 20, 5, 3)
+monster_list1 = [Monster("Skeleton", 40, 20, 1.2, 1),
+                 Monster("Goblin", 75, 10, 1.5, 1),
+                 Monster("Goon", 35, 20, 1.2, 1),
+                 Monster("Bandit", 50, 13, 1.1, 1),
+                 Monster("Zombie",60, 12, 1.2, 1),
+                 Monster("Spider", 50, 10, 1.3, 1),
+                 Monster("Cannibal",45, 14, 1.5, 1),
+                 Monster("Gnome", 20, 5, 3, 1)
                  ]
 
-monster_list2 = [Monster("Demon", 150, 26, 1.3),
-                 Monster("Troll", 200, 18, 1.5),
-                 Monster("Vandrande Själ", 75, 35, 1.2),
-                 Monster("Varulv", 175, 23, 1.5),
-                 Monster("Griffin", 125, 28,1.4),
-                 Monster("Minotaur",225,15,2),
-                 Monster("Alcoholic Unc", 100, 8, 6)]
+monster_list2 = [Monster("Demon", 150, 26, 1.3, 2),
+                 Monster("Troll", 200, 18, 1.5, 2.5),
+                 Monster("Vandrande Själ", 75, 35, 1.2, 2.5),
+                 Monster("Varulv", 175, 23, 1.5, 2.5),
+                 Monster("Griffin", 125, 28,1.4, 2.5),
+                 Monster("Minotaur",225,15,2, 2),
+                 Monster("Alcoholic Unc", 100, 8, 6, 2.5)]
 
-monster_list3 = [Monster("Jätte", 300, 35, 1.3),
-                 Monster("Drake", 250, 45, 1.2),
-                 Monster("Golem", 400, 20, 1.1),
-                 Monster("Hydra",275,40,1.5),
-                 Monster("Midsgårdsormen", 400, 30, 1.05 )]   # Han är en dyr modell
+monster_list3 = [Monster("Jätte", 300, 35, 1.3, 4),
+                 Monster("Drake", 250, 45, 1.2, 4),
+                 Monster("Golem", 400, 20, 1.1, 4),
+                 Monster("Hydra", 275, 40, 1.5, 4),
+                 Monster("Midsgårdsormen", 400, 30, 1.05, 3)]   # Han är en dyr modell
 
-sandworm = Monster("Sandworm", 124, 24, 1.2)
-Boss = Monster("The King of Darkness", 500, 100, 1.1)
-SkelettRaptor = Monster("Skelett Raptor", 100, 30, 1.3)
-SkogensVäktare = Monster("Skogens Väktare",150,20, 1.2 )
-FiskMänniska = Monster("Lil FLOPPA",100, 20, 1.2)
-Skuggriddare = Monster("Skuggriddare", 200, 25, 2.5)
+sandworm = Monster("Sandworm", 124, 24, 1.2, 3)
+Boss = Monster("The King of Darkness", 500, 100, 1.1, -100)
+SkelettRaptor = Monster("Skelett Raptor", 100, 30, 1.3, 2)
+SkogensVäktare = Monster("Skogens Väktare",175,20, 1.2, 3)
+FiskMänniska = Monster("Lil FLOPPA",100, 20, 1.2, 3)
+Skuggriddare = Monster("Skuggriddare", 200, 25, 2.5, 3)
 # Gameplay
 
 def slowtype(text, tid):
@@ -364,7 +364,7 @@ def slots():
     while True:
         slowtype(f"Du har {playerclass.money} guld", 0.05)
         if playerclass.money >= 4:
-            slot = input("Vill du spinna? Ja / Nej").upper()
+            slot = input("Vill du spinna? Ja / Nej -> ").upper()
             if slot == "NEJ":           # Gjort med mening för just här måste man säga exact rätt för att dra
                 slowtype("Kom tillbaka tills slots snart, nästa vinst är bara ett drag ifrån!", 0.05)
                 break
@@ -454,7 +454,7 @@ def blackjack():            # Self kreatvitet och problem träning med påhittad
             while spelarsumma<= 21 and dealersumma < 22 and avgjort == False:   # Nedans körs om ingen värde  är över 21 och det inte är avgjort ( sist i stand elif)
                 slowtype(f"Du har korten {spelarlista[:n]} summa: {spelarsumma}  Dealarn har {dealarlista[:s]}", 0.05)   # ger infomration om utgångsläget
                 slowtype("You wanna hit or stand? H / S", 0.05)
-                ba1 = input("->")   #Val
+                ba1 = input("-> ")   #Val
                 ba1 = ba1.upper()          # Felhantering
                 if ba1 == "H":
                     spelar3 = carddraw(kortlek,num)
@@ -483,7 +483,6 @@ def blackjack():            # Self kreatvitet och problem träning med påhittad
                         slowtype(f"Du har {spelarlista[:n]} summa: {spelarsumma}. Delarn har {dealarlista} summa: {dealersumma}", 0.07)
                         slowtype("Dealern pulls", 0.05)
                         dealarnew = carddraw(kortlek,num)
-                        dealarnew = "A"
                         vas = str(dealarnew)
                         dealarlista.append(vas)
                         dealernum = dealarlista
@@ -531,7 +530,7 @@ def baren():
     slowtype("At the moment it's pretty calm but you can see broken chair in a corner... \n probably the rest of a earlier bar fight",0.05)
     slowtype("You look for the bartender but he is nowwhere to be seen",0.05)
     slowtype("At the stools there is only two people filling the more than 20 seats", 0.07)
-    slowtype("The first person is male who looks forty and has put his forhead agianst the counter, perhaps resting his neck while he continuously scrols through reels", 0.05)
+    slowtype("The first person is male who looks forty and has his forhead agianst the counter, perhaps resting his neck while he continuously scrols through reels", 0.05)
     slowtype("And a girl look kinda sus", .07)
     while True:
         slowtype("What do you want to do?   1: Talk to the man  2. Sit alone  3. Leave the bar",0.07)
@@ -564,7 +563,7 @@ def baren():
             slowtype("After a minute or two you hear a loud bang", 0.05)
             time.sleep(0.5)
             slowtype("You jump up", 0.05)
-            slowtype("What the hell, what the hell was thhat!", 0.05)
+            slowtype("What the hell was that!", 0.05)
             time.sleep(2)
             slowtype("Calm down little boy",0.05)
             slowtype("You turn around and see the women you saw earlier looking at you",0.05)
@@ -816,7 +815,7 @@ def battle(monsterval, playerclass, alive):  # Parametrar, monsterval från mons
         if battlec == "1":
 
             dmg = playerclass.str * playerclass.weapon.damage   # Weapon dmg har mellan 1-2 faktor
-
+            dmg = round(dmg)
             all_critrate = playerclass.critrate + playerclass.weapon.critrate    #Olika gubbar har olika critrate samma gäller vapen som adderas på varandra
             if rand.random() <= all_critrate:  # Slumpar mellan 1 som jämförs med deicmaltal t.ex. 0,3 om det är under det så är det crit
                 dmg *= playerclass.crit_damage * playerclass.weapon.crit_damage  # Vanlig dmg* gånger wepon och player crit som båda är faktorer
@@ -852,19 +851,23 @@ def battle(monsterval, playerclass, alive):  # Parametrar, monsterval från mons
             slowtype(f"Du fick {reward} xp", 0.05)
             
             return 
+        monsterdmg = monsterval.dmg
         if rand.random() < 0.1:
-            monsterval.dmg *= monsterval.crit_damage
-            monsterval.dmg = round(monsterval.dmg)
+            monsterdmg *= monsterval.crit_damage
+            monsterdmg = round(monsterval.dmg)
             slowtype("Monstret fick en crit!!!", 0.02)
+        if rand.random() < 0.15:
+            monsterdmg *= 0
+            slowtype("Monstert missade sin attack")
         slowtype(f"{monsterval.name} attackerar dig och gör {monsterval.dmg} skada!", 0.02)
-        playerclass.hp -= monsterval.dmg
+        playerclass.hp -= monsterdmg
         slowtype(f"Nu har du {playerclass.hp}hp kvar", 0.02)
         input("->")
         os.system('cls' if os.name == 'nt' else 'clear')
 
         if playerclass.hp <= 0:
             slowtype("Du blev besegrad av monstret!", 0.1)
-            playerclass.alive = False
+            alive = False
             return alive
 
 def grottvägen(alive):
@@ -1013,7 +1016,7 @@ def grottvägen(alive):
         slowtype("Sanden knastrar under dina fötter och gångarna blir smalare", 0.05)
         slowtype("Plötsligt ser du en stor hiss", 0.05)
         slowtype("Den ser gammal ut men den kanska funkar", 0.05)                       
-        hissvar = input("Vill du trycka på hissknappen?")        
+        hissvar = input("Vill du trycka på hissknappen? -> ")        
         hissvar = hissvar.upper()
         if hissvar == "JA":
             slowtype("Det börjar låta och hissen kommer ner",0.05)
@@ -1156,7 +1159,8 @@ Luften blir kylig och stilla. Något prasslar mellan stammarna, men du kan inte 
     if vägdecision() ==1:
         slowtype("Du kan inte hantera chocken och bestämmer dig för att vända tillbaks.", 0.05)
         return alive
-    slowtype("Efteråt fortsätter du djupare in i den mörka skogen medans du vandrar mellan de höga vajande träden, tills du känner att någonting inte riktigt stämmer.",0.05)
+    slowtype("Efteråt fortsätter du djupare in i den mörka skogen.",0.05) 
+    slowtype("Medans du vandrar mellan de höga vajande träden, känner att någonting inte riktigt stämmer.",0.05)
     slowtype("Två röda ögon ses blinka mellan träden, och de verkar spana in just dig.",0.05)
     slowtype("På mindre än en sekund springer monstret och hoppar på dig!",0.05)
     time.sleep(2)
@@ -1228,6 +1232,7 @@ Luften blir kylig och stilla. Något prasslar mellan stammarna, men du kan inte 
                                 slowtype(f"Vad är det {playerclass.pname}? Undrar Greta.",0.05)
                                 slowtype("Detta är den bästa grytan jag någonsin smakat! utbrister du.",0.05)
                                 slowtype("Jag känner mig typ starkare!!! Skriker du glatt.",0.05)
+                                slowtype("Du fick 10 hp",0.05)
                                 playerclass.hp += 10
                                 slowtype("Men vad roligt att du gil... försöker Greta säga då hon blev avbruten av ett högt vrål.",0.05)
                                 slowtype("Det är nog dags att gå och lägga oss säger Greta nervöst.",0.05)
@@ -1341,7 +1346,7 @@ def abanondedcity(alive):
                 slowtype("Helt plötsligt så börjar den spela ett högt ljud och en lucka öppnar sig.", 0.05)
                 slowtype("Ut kom runt 20 guld, det värkar vara din lyckodag!", 0.05)
                 slowtype("Du plockar upp mynten och går din väg.", 0.05)
-                playerclass.amoney(20)
+                playerclass.amoney(25)
                 break
             
             elif trapporupellerner == "NER":
@@ -1620,7 +1625,7 @@ Nu ekar tystnaden mellan ruinerna, och platsen bär på historiens mysterier och
 def main(alive):
     while alive == True:
         os.system('cls' if os.name == 'nt' else 'clear')
-        time.sleep(1)
+        time.sleep(0.25)
         slowtype(f"""
                     Välkommen till Sweelept         Lvl:{playerclass.lvl}   
 
@@ -1675,7 +1680,7 @@ def main(alive):
             invval = invval.upper()
             if invval == "JA":
                 if len(playerclass.inventory) > 0:
-                    slowtype("Vad vill du ha använda för item? Koperia namnet från item listan",0.05)
+                    slowtype("Vad vill du använda för item? Koperia namnet från item listan",0.05)
                     cons = input()
                     playerclass.use_item(cons)
                     playerclass.str = round(playerclass.str)
